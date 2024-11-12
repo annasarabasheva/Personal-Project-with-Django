@@ -1,0 +1,92 @@
+Idea behind this project: **UniMatch**
+Creating a web application to help prospective students make informed choices by connecting them with current students and alumni in different universities
+
+It will have different faculties, unis, students, countries.
+Apps will be: accounts, common, uni ... for now
+Add your uni: location, uni name, faculty
+Add yourself as student if you already are one: name, uni, subject, location
+If someone is interested in your uni he/she will show interest somehow:not sure how exactly yet
+Form for questions about uni: like comment section
+It will be on the principle of forum but for unis and students that will give advice to people who maybe want to apply there
+Catalog with all unis that students already registered when using the platform
+maybe they will be split into countries:  Bulgaria, Germany, depends what you are interested in
+Home Page: Welcome to ... What is your country of interest: then the user types the country in the search bar and get catalog with unis already registered in this country
+In the next page there will be like a nav with all different faculties and when the user select one, only students that studies the same will be shown with their unis
+then if you have profile you will be able to see the detailed describtion of the student and their uni
+then if you are interested you will be able to subscribe to them maybe and ask them personal question
+
+1. Core Concept and Features
+
+Forum-style interaction: Allowing users to ask questions, get insights from students and alumni, and show interest in specific universities will be helpful for users.
+University Catalog: This is valuable because it helps prospective students find institutions by country and faculty.
+User Profiles and Interests: Enabling users to "show interest" or subscribe to other users will create a sense of community.
+Search and Filtering by Country, University, and Faculty: This will make it easy to navigate and target specific areas of interest.
+Overall, the idea addresses the needs of prospective students looking for advice from actual students/alumni, and it brings information and personalization into the decision-making process.
+
+2. Django Apps and Structure
+
+1. accounts
+Purpose: To handle all user-related features, including authentication, user profile management, and subscriptions.
+Models: UserProfile (extending Django’s User), Subscription
+Key Features:
+Registration, login, logout, profile update
+Viewing other users' profiles (permissions to view detailed descriptions)
+Subscriptions or "show interest" functionality (to track and interact with specific students or universities)
+Views: Profile view, profile update view, registration/login views, subscription management views.
+2. universities
+Purpose: To manage university-related data and provide browsing/searching functionalities.
+Models: University, Faculty, Country
+Key Features:
+Add and edit university information
+Filter universities by country, faculty, and other attributes
+Detailed views of each university
+Views: University list view (with filters for country and faculty), detailed university view, add/edit university view.
+3. students
+Purpose: To manage student profiles and their associations with universities and faculties.
+Models: StudentProfile (linked to UserProfile), Subject
+Key Features:
+Students register their university, faculty, and subject of study
+Option to add personal descriptions to help others learn more about their experiences
+Views: Student profile view (linked to university and faculty), form to add/edit student details.
+4. forum (or comments/interactions)
+Purpose: To allow interactions between users and provide a space for questions, comments, and general discussions.
+Models: Question, Comment, Interest
+Key Features:
+A question and answer section (forum-like) for universities and students
+Each university or student can have a "show interest" option and comment section for public questions
+Private messaging could be added later as a more advanced feature
+Views: Question list and detail views, comment form, interest/subscription toggle button
+5. common (optional)
+Purpose: To hold reusable components, utilities, or shared models.
+Models: Any shared model or utility function that multiple apps might need.
+Key Features: Holds templates, styles, and reusable views for other apps.
+Views: Shared views or functions for things like search, pagination, etc.
+
+3. Additional Considerations
+Database Relationships
+Set up relationships between UserProfile, StudentProfile, University, and Faculty so you can easily query related information.
+Examples:
+University can have a ManyToMany relationship with Faculty (a university can have multiple faculties and a faculty can be part of multiple universities).
+StudentProfile can have a ForeignKey relationship to University and Faculty.
+Navigation and User Flow
+Home Page: Welcomes the user and offers a search bar with country as an initial filter.
+University Page: Shows the university’s details, faculties, and associated students.
+Faculty Navigation: After selecting a faculty, the user can see associated students and related subjects.
+Student Detail Page: Shows more detailed information about each student, including the option to subscribe or ask questions.
+User Experience Features
+Search and Filtering: Enable search by university, faculty, and country with AJAX for a smooth experience.
+Notifications (Advanced): Notify users if someone shows interest in them or their university.
+Permissions and Privacy: Ensure that certain features (like detailed profiles or messaging) are available only to registered users.
+4. Development Plan
+Set Up the Project and Models:
+Start by setting up the basic Django project, configuring the database, and creating the models for each app.
+Build Basic Views and Templates:
+Focus on getting simple list and detail views up for universities, students, and accounts.
+Add Forms and Authentication:
+Build forms for adding/editing user, student, and university data. Integrate user authentication.
+Develop the Forum/Interaction System:
+Build out the forum or comment section to allow users to interact with universities and students.
+Add Filtering and Search Functionality:
+Implement search and filtering by country, faculty, and university.
+Testing and Refinement:
+Test user flows, fix bugs, and refine the UI/UX for a smooth experience.
