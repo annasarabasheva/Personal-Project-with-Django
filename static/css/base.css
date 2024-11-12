@@ -1,0 +1,54 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+   font-family: "Satisfy", cursive;
+}
+
+img {
+    display: block;
+    width: 8%;
+    height: auto;
+    margin-left: 1em;
+}
+
+.navigation {
+    padding: 0.5em;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.navigation ul {
+    display: flex; /* Flexbox for horizontal arrangement */
+    list-style: none; /* Remove bullet points */
+}
+
+/* Style the individual list items */
+.navigation li {
+    margin-top: 3em;
+}
+
+/* Style the anchor (links) inside the list items */
+.navigation a {
+    color: black;
+    font-size: 26px; /* Font size */
+    text-decoration: none; /* Remove underlines */
+    padding: 10px 20px; /* Padding around the links */
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect when you hover over the links */
+.navigation a:hover {
+    background-color: #cbc3c3; /* Change background color on hover */
+}
+
+
+footer {
+    padding: 0.5em;
+    font-size: 30px;
+}
