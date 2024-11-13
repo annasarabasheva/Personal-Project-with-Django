@@ -1,3 +1,5 @@
+
+
 * {
     padding: 0;
     margin: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-   font-family: "Satisfy", cursive;
+    font-family: "DM Serif Display", serif;
 }
 
 img {
@@ -23,28 +25,27 @@ img {
 }
 
 .navigation ul {
-    display: flex; /* Flexbox for horizontal arrangement */
-    list-style: none; /* Remove bullet points */
+    display: flex;
+    list-style: none;
 }
 
-/* Style the individual list items */
+
 .navigation li {
     margin-top: 3em;
 }
 
-/* Style the anchor (links) inside the list items */
+
 .navigation a {
     color: black;
-    font-size: 26px; /* Font size */
-    text-decoration: none; /* Remove underlines */
-    padding: 10px 20px; /* Padding around the links */
-    border-radius: 5px; /* Slightly rounded corners */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-size: 26px;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-/* Hover effect when you hover over the links */
 .navigation a:hover {
-    background-color: #cbc3c3; /* Change background color on hover */
+    background-color: #cbc3c3;
 }
 
 
