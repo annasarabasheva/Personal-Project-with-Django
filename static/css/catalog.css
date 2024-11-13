@@ -1,0 +1,58 @@
+.uni-container {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    padding: 2em;
+
+}
+
+.uni-card {
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 270px;
+    text-align: center;
+    padding: 1em;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Adds a soft shadow */
+    border-radius: 8px;
+
+
+}
+
+.uni-logo {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.3em;
+
+}
+
+.year {
+    margin-bottom: 0.7em;
+}
+.uni-card p:last-of-type {
+    margin-top: 0.5em;
+}
+
+h2 {
+    text-align: center;
+    font-family: "Satisfy", cursive;
+    font-size: 35px;
+    margin-bottom: 0.5em;
+}
+
+.uni-card a {
+    margin-top: 0.5em;
+    font-family: "Satisfy", cursive;
+    font-size: 23px;
+    text-decoration: none;
+    color: #853010;
+
+}
+.uni-card a img {
+    margin: 0 auto;
+}

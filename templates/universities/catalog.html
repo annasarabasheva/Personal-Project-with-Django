@@ -1,0 +1,33 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Universities in {{ country_query }}</h2>
+
+    {% if universities %}
+
+        <div class="uni-container">
+            {% for university in universities %}
+
+                <div class="uni-card">
+                    {% if university.logo_url %}
+                        <img src="{{ university.logo_url }}" alt="{{ university.name }} Logo" class="uni-logo">
+                    {% else %}
+                         <img src="{% static 'images/default-logo.jpg' %}" alt="Default Logo" class="uni-logo">
+                    {% endif %}
+                    {% if university.year_established %}
+                        <p class="year">Founded in {{ university.year_established }}</p>
+                    {% endif %}
+                    <h3>{{ university.name }}</h3>
+                    <p>{{ university.city }}, {{ university.country }}</p>
+
+                    <a href="#"><img src="{% static 'images/student.png' %}" alt="Students" ><span class="text">See all students here</span></a>
+                </div>
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <p>Sorry, none of our users are students in {{ country_query }}.</p>
+    {% endif %}
+{% endblock %}
