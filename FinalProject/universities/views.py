@@ -1,18 +1,28 @@
-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from FinalProject.universities.models import University
 
 
 def catalog(request):
-    # Get the search query from the request
     country_query = request.GET.get('query', '')
 
-    # Filter universities based on the country specified in the search bar
+    if not country_query:
+        return redirect('all-unis')
+
     universities = University.objects.filter(country__icontains=country_query)
 
-    # Pass universities and search query to the template
+
     context = {
         'universities': universities,
         'country_query': country_query,
     }
     return render(request, 'universities/catalog.html', context)
+
+
+def all_unis(request):
+    unis = University.objects.all()
+
+    context = {
+        'unis': unis,
+    }
+
+    return render(request, 'universities/all-unis.html', context)
