@@ -40,8 +40,14 @@ class Student(models.Model):
         help_text="A short bio or description of the student"
     )
 
+    photo = models.URLField(
+        blank=True,
+        null=True,
+        help_text="Profile photo of the student"
+    )
+
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.university.name}"
 
     class Meta:
-        ordering = ["last_name", "first_name"]
+        ordering = ["first_name", "last_name"]

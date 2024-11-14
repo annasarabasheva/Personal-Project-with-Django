@@ -1,0 +1,44 @@
+.students-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to new rows */
+    gap: 1em;
+    background-color: #c9dbf3;
+    justify-content: center;
+    padding: 2em 1em 20em 1em;
+}
+
+.student-card {
+    display: flex;
+    flex: 1 1 calc(33.333% - 2em); /* Max three per row, considering gap */
+    max-width: 500px; /* Optional max width to control card size */
+    background-color: #f8f6f6;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+}
+
+.image-card {
+    flex: 1;
+    max-width: 100px;
+    margin-right: 1em;
+}
+
+.student-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+.student-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    gap: 0.4em;
+    margin-left: 1em;
+}

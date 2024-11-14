@@ -42,7 +42,7 @@ h2 {
     text-align: center;
     font-family: "Satisfy", cursive;
     font-size: 35px;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.1em;
 }
 
 .uni-card a {
@@ -55,4 +55,21 @@ h2 {
 }
 .uni-card a img {
     margin: 0 auto;
+}
+
+.sorry-form {
+    font-size: 35px;
+    text-align: center;
+    padding: 5.5em;
+
+    background-image: url("../images/empty-hall.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+
+
+}
+.sorry-form p {
+    margin-bottom: 1em;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
 }

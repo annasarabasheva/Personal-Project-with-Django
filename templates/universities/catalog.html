@@ -2,9 +2,10 @@
 {% load static %}
 
 {% block content %}
-    <h2>Universities in {{ country_query }}</h2>
 
     {% if universities %}
+
+        <h2>Universities in {{ country_query }}</h2>
 
         <div class="uni-container">
             {% for university in universities %}
@@ -21,13 +22,20 @@
                     <h3>{{ university.name }}</h3>
                     <p>{{ university.city }}, {{ university.country }}</p>
 
-                    <a href="#"><img src="{% static 'images/student.png' %}" alt="Students" ><span class="text">See all students here</span></a>
+                    <a href="{% url 'university_students' university_id=university.id%}"><img src="{% static 'images/student.png' %}" alt="Students" ><span class="text">See all students here</span></a>
                 </div>
 
             {% endfor %}
         </div>
 
     {% else %}
-        <p>Sorry, none of our users are students in {{ country_query }}.</p>
+        <div class="sorry-form">
+             <p>Sorry, none of our users are students in {{ country_query }}.</p>
+             <form method="get" class="search-form">
+                    <input type="text" name="query" placeholder="Try another country..." class="search-input">
+                    <button type="submit" class="search-button">Search</button>
+             </form>
+        </div>
+
     {% endif %}
 {% endblock %}
