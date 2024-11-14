@@ -8,7 +8,7 @@
             <div class="student-card">
                 <div class="image-card">
                     {% if student.photo %}
-                        <img src="{{ student.photo.url }}" alt="{{ student.first_name }} {{ student.last_name }}'s photo" class="student-photo">
+                        <img src="{{ student.photo}}" alt="{{ student.first_name }} {{ student.last_name }}'s photo" class="student-photo">
                     {% else %}
                         <img src="{% static 'images/default-student.jpeg' %}" alt="{{ student.first_name }} {{ student.last_name }}'s photo" class="student-photo">
                     {% endif %}

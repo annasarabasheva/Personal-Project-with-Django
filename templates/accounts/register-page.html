@@ -1,15 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1> This is the register page</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button>Submit</button>
-    </form>
-</body>
-</html>
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="register-container">
+        <div class="register-card">
+            <h2>Create an Account</h2>
+            <p>Please fill out the form below to register.</p>
+            
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <label for="id_username">Username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="error-message">
+                            {% for error in form.username.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="input-group">
+                    <label for="id_email">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="error-message">
+                            {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="input-group">
+                    <label for="id_password1">Password</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div class="error-message">
+                            {% for error in form.password1.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <div class="input-group">
+                    <label for="id_password2">Confirm Password</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <div class="error-message">
+                            {% for error in form.password2.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+                <button type="submit" class="register-button">Register</button>
+            </form>
+
+
+            <p class="has-account">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        </div>
+    </div>
+{% endblock %}

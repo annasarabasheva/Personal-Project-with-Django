@@ -1,0 +1,120 @@
+
+.register-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 80vh;
+    background-color: #f0f4fa;
+    padding-top: 2em;
+    padding-bottom: 3em;
+}
+
+
+.register-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 3em;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.register-card h2 {
+    font-size: 2em;
+    color: #333333;
+    margin-bottom: 0.3em;
+}
+
+.register-card p {
+    font-size: 1.2em;
+    color: #555555;
+    margin-bottom: 2em;
+}
+
+.error-message {
+    background-color: #ffdddd;
+    color: #d9534f;
+    padding: 1em;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    font-size: 0.95em;
+}
+
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1.2em;
+}
+
+.input-group label {
+    display: block;
+    font-size: 1em;
+    color: #666666;
+    margin-bottom: 0.3em;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1em;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    font-size: 1.05em;
+    color: #333333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #5a67d8;
+    background-color: #ffffff;
+}
+
+
+.register-button {
+    display: inline-block;
+    width: 100%;
+    padding: 1em;
+    font-size: 1.1em;
+    color: #ffffff;
+    background-color: #5a67d8;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-top: 1.2em;
+}
+
+.register-button:hover {
+    background-color: #434c9c;
+}
+
+.has-account {
+    font-size: 1em;
+    color: #5a67d8;
+    margin-top: 2em;
+}
+
+.has-account a {
+    color: #5a67d8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.has-account a:hover {
+    text-decoration: underline;
+}
