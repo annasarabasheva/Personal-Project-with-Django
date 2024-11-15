@@ -13,13 +13,14 @@ UserModel = get_user_model()
 
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login-page.html'
+    next_page = reverse_lazy('all-unis')
 
 
 class AppUserRegisterView(CreateView):
     model = UserModel
     form_class = AppUserCreationForm
     template_name = 'accounts/register-page.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('all-unis')
 
     def form_valid(self, form):
         response = super().form_valid(form)
