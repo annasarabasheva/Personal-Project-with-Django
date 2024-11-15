@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+
+        <div class="profile-picture">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture }}" alt="Profile Picture" class="profile-img">
+            {% else %}
+                <img src="{% static 'images/default-profile.jpeg' %}" alt="Default Profile" class="profile-img">
+            {% endif %}
+        </div>
+
+        <div class="profile-info">
+            <h1>{{ profile.first_name|default:"First Name" }} {{ profile.last_name|default:"Last Name" }}</h1>
+            <p><strong>Username:</strong> {{ profile.user.username }}</p>
+            <p><strong>Email:</strong> {{ profile.user.email }}</p>
+        </div>
+
+        <div class="profile-actions">
+            <a href="#" class="button">Edit Profile</a>
+            <a href="#" class="button">Delete Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
