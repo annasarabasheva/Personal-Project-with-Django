@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from FinalProject.accounts.forms import AppUserCreationForm
+from FinalProject.accounts.forms import AppUserCreationForm, ProfileEditForm
 from FinalProject.accounts.models import Profile
 
 UserModel = get_user_model()
@@ -38,3 +39,21 @@ def my_profile(request):
         'profile': profile,
     }
     return render(request, 'accounts/profile-details-page.html', context)
+
+
+@login_required
+def edit_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile-details')  # Adjust this to your actual profile detail URL
+    else:
+        form = ProfileEditForm(instance=profile)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/profile-edit-page.html', context)

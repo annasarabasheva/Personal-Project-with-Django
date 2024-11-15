@@ -1,0 +1,123 @@
+/* Edit Profile Page Styling */
+.edit-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f4fa;
+    padding: 2em 0;
+}
+
+.edit-profile-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    padding: 3em;
+    border-radius: 10px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.edit-profile-card h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.profile-picture {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 130px;
+    height: 130px;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.form-group {
+    text-align: left;
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 0.5em;
+    display: block;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1em;
+    font-size: 1.1em;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 1.2em;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #5a67d8;
+    background-color: #fff;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.save-button,
+.cancel-button {
+    padding: 1em 2em;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 48%;
+}
+
+.save-button {
+    background-color: #5a67d8;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: #434c9c;
+}
+
+.cancel-button {
+    background-color: #f2f2f2;
+    color: #333;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #e2e2e2;
+}
