@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path, include
-from FinalProject.accounts.views import AppUserLoginView, AppUserRegisterView, my_profile, edit_profile
+from FinalProject.accounts.views import AppUserLoginView, AppUserRegisterView, my_profile, edit_profile, delete_profile
 
 urlpatterns = [
     path('login/', AppUserLoginView.as_view(), name='login'),
@@ -9,6 +9,7 @@ urlpatterns = [
     path('profile/', include([
         path('', my_profile, name='profile-details'),
         path('edit/', edit_profile, name='profile-edit'),
+        path('/delete/', delete_profile, name='profile-delete')
     ]))
 
 ]

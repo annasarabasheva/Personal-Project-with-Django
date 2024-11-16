@@ -1,4 +1,5 @@
-from django.contrib.auth import get_user_model, login
+from django.contrib import messages
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, get_object_or_404, render
@@ -58,3 +59,19 @@ def edit_profile(request):
         'form': form,
     }
     return render(request, 'accounts/profile-edit-page.html', context)
+
+
+@login_required
+def delete_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+
+    if request.method == 'POST' and 'confirm' in request.POST:
+        user = request.user
+        profile.delete()
+        user.delete()
+
+        logout(request)
+        messages.success(request, "Your profile has been successfully deleted.")
+        return redirect('home')
+
+    return render(request, 'accounts/profile-delete-page.html')

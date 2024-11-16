@@ -1,0 +1,82 @@
+.confirm-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    background-color: #f0f4fa;
+    padding: 1em;
+}
+
+.confirm-card {
+    background-color: #ffffff;
+    padding: 2em;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.confirm-card h2 {
+    margin-bottom: 1em;
+    font-size: 1.8em;
+    color: #333;
+}
+
+.confirm-card p {
+    margin-bottom: 1.5em;
+    color: #555;
+    line-height: 1.5;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    margin-top: 2em;
+}
+
+.confirm-button,
+.cancel-button {
+    padding: 0.8em 2em;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 150px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-button {
+    background-color: #d9534f;
+    color: white;
+    margin-bottom: 0.8em;
+    font-family: "DM Serif Display", serif;
+}
+
+.confirm-button:hover {
+    background-color: #c9302c;
+}
+
+.confirm-button:active {
+    transform: scale(0.98);
+}
+
+.cancel-button {
+    background-color: #5a67d8;
+    color: white;
+    text-decoration: none;
+    font-family: "DM Serif Display", serif;
+}
+
+.cancel-button:hover {
+    background-color: #434c9c;
+}
+
+.cancel-button:active {
+    transform: scale(0.98);
+}

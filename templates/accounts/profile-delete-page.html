@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% block content %}
+<div class="confirm-container">
+    <div class="confirm-card">
+        <h2>Are you sure you want to delete your profile?</h2>
+        <p>This action is permanent and cannot be undone.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" name="confirm" class="button confirm-button">Yes, Delete My Profile</button>
+        </form>
+        <a href="{% url 'profile-details' %}" class="button cancel-button">Cancel</a>
+    </div>
+</div>
+{% endblock %}
