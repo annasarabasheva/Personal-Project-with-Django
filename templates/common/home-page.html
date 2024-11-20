@@ -6,16 +6,16 @@
 {% block content %}
 <div class="home">
     <h1>Welcome to UniMatch</h1>
-    <p>🌟 Find your perfect university – wherever you dream to study.</p>
-    <p>Explore campuses, chat with students, and get advice tailored to you.</p>
+    <p>📚 Find your perfect university – wherever you dream to study.</p>
+    <p>📖 Explore campuses, chat with students, and get advice tailored to you.</p>
     <div class="first-step">
         <!-- Search Bar -->
         <form method="get" action="{% url 'catalog' %}" class="search-form">
             <input type="text" name="query" placeholder="Enter country here..." class="search-input">
-            <button type="submit" class="search-button">Start Your Journey</button>
+            <button type="submit" class="search-button">Search</button>
         </form>
         <p class="moving">🌍 Start by choosing your dream country.</p>
-        <p>🎓 Already enrolled? <a href="#">Join the student network</a></p>
+        <p>Already enrolled? ✍️ <a href="#">Join the student network</a></p>
     </div>
 </div>
 {% endblock %}

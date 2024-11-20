@@ -1,4 +1,4 @@
-/* Main container */
+
 .home {
     position: relative;
     color: white;
@@ -9,7 +9,7 @@
     text-align: center;
 }
 
-/* Background with video-like gradient animation */
+
 .home::before {
     content: "";
     position: absolute;
@@ -19,8 +19,8 @@
     bottom: 0;
     background-image: linear-gradient(
         to bottom right,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.8)
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.6)
     ),
     url("../images/background.jpg");
     background-size: cover;
@@ -30,7 +30,6 @@
     z-index: -1;
 }
 
-/* Hero heading */
 .home h1 {
     font-size: 55px;
     margin-bottom: 0.5em;
@@ -38,14 +37,13 @@
     font-family: "Satisfy", cursive;
 }
 
-/* Hero paragraphs */
+
 .home p {
     font-size: 28px;
     margin-bottom: 1em;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 1.5);
 }
 
-/* Search Form Styles */
 .search-form {
     display: flex;
     align-items: center;
@@ -88,7 +86,7 @@
     transform: scale(1.05);
 }
 
-/* Animation for text */
+
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -106,14 +104,14 @@
     font-size: 24px;
 }
 
-/* Styling for links */
+
 .first-step p:last-of-type {
-    font-size: 20px;
-    margin-top: 1em;
+    font-size: 24px;
+    margin-top: 3em;
 }
 
 .first-step p:last-of-type a {
-    color: #c9dbf3;
+    color: #a1c6f5;
     text-decoration: none;
     font-weight: bold;
 }
