@@ -1,29 +1,21 @@
 {% extends 'common/base.html' %}
 
-{% block navigation %}{% endblock %}  <!-- Empty block to remove the navigation -->
-{% block footer %}{% endblock %}  <!-- Empty block to remove the footer -->
+{% block navigation %}{% endblock %} <!-- Navigation removed -->
+{% block footer %}{% endblock %} <!-- Footer removed -->
 
 {% block content %}
-
-
-    <div class="home">
-        <h1> Welcome to UniMatch</h1>
-        <p>It's a match! Discover the uni that gives you all the right vibes.</p>
-        <p>Explore campuses, connect with current students, and get real advice – all to help you make the right choice.</p>
-        <div class="first-step">
-             <!-- Search Bar -->
-            <form method="get"  action="{% url 'catalog' %}" class="search-form">
-                <input type="text" name="query" placeholder="Country of interest..." class="search-input">
-                <button type="submit" class="search-button">Search</button>
-            </form>
-            <p class="moving">First step: pick the country that’s calling your name.</p>
-
-            <p>Ohhh already a student... <a href="#">Click here then</a></p>
-
-        </div>
-
-
+<div class="home">
+    <h1>Welcome to UniMatch</h1>
+    <p>🌟 Find your perfect university – wherever you dream to study.</p>
+    <p>Explore campuses, chat with students, and get advice tailored to you.</p>
+    <div class="first-step">
+        <!-- Search Bar -->
+        <form method="get" action="{% url 'catalog' %}" class="search-form">
+            <input type="text" name="query" placeholder="Enter country here..." class="search-input">
+            <button type="submit" class="search-button">Start Your Journey</button>
+        </form>
+        <p class="moving">🌍 Start by choosing your dream country.</p>
+        <p>🎓 Already enrolled? <a href="#">Join the student network</a></p>
     </div>
-
-
+</div>
 {% endblock %}

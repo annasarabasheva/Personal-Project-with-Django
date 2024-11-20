@@ -9,7 +9,7 @@ urlpatterns = [
     path('profile/', include([
         path('', my_profile, name='profile-details'),
         path('edit/', edit_profile, name='profile-edit'),
-        path('/delete/', delete_profile, name='profile-delete')
+        path('delete/', delete_profile, name='profile-delete')
     ]))
 
 ]
