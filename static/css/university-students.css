@@ -1,13 +1,12 @@
-/* Container for all student cards */
+
 .students-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5em;
     padding: 2em;
-    background-color: #eef2f7; /* Light background */
+    background-color: #eef2f7;
 }
 
-/* Individual student card */
 .student-card {
     background-color: #ffffff;
     border: 1px solid #dfe3e8;
@@ -22,20 +21,20 @@
     padding: 1.5em;
 }
 
-/* Hover effect for cards */
+
 .student-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Student image container */
+
 .image-card {
     width: 100px;
     height: 100px;
     margin-bottom: 1em;
     overflow: hidden;
     border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .student-photo {
@@ -45,7 +44,7 @@
     display: block;
 }
 
-/* Student information */
+
 .student-info {
     display: flex;
     flex-direction: column;
@@ -61,7 +60,11 @@
 }
 
 .student-info p {
-    font-size: 0.9em;
-    color: #666666;
+    font-size: 1em;
+    color: #235285;
     margin: 0;
+}
+em {
+    margin-right: 0.5em;
+    color: #656161;
 }

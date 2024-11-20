@@ -3,11 +3,11 @@
     justify-content: center;
     gap: 2em;
     padding: 2em;
-
+    flex-wrap: wrap;
 }
 
 .uni-card {
-    background-color: #dee9fa;;
+    background-color: #dee9fa;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,10 +15,14 @@
     text-align: center;
     padding: 1em;
     font-size: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Adds a soft shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-
+.uni-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .uni-logo {
@@ -28,12 +32,12 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-bottom: 0.3em;
-
 }
 
 .year {
     margin-bottom: 0.7em;
 }
+
 .uni-card p:last-of-type {
     margin-top: 0.5em;
 }
@@ -51,8 +55,8 @@ h2 {
     font-size: 23px;
     text-decoration: none;
     color: #853010;
-
 }
+
 .uni-card a img {
     margin: 0 auto;
 }
@@ -61,14 +65,12 @@ h2 {
     font-size: 35px;
     text-align: center;
     padding: 5.5em;
-
     background-image: url("../images/empty-hall.jpg");
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-
-
 }
+
 .sorry-form p {
     margin-bottom: 1em;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
