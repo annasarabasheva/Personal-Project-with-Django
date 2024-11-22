@@ -18,7 +18,7 @@
 
             {% if user.profile.is_student %}
                 <!-- Visible to logged-in students only -->
-                <li><a href="#">Student Network</a></li>
+                <li><a href="{% url 'add-university' %}">Add My Uni</a></li>
             {% endif %}
 
             <!-- Logout -->
