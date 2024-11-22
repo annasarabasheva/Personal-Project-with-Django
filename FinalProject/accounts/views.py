@@ -26,7 +26,13 @@ class AppUserRegisterView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        login(self.request, self.object)  # Auto Login after Register
+        # Auto Login after Register
+        login(self.request, self.object)
+
+        # Update profile `is_student` value
+        profile = self.object.profile
+        profile.is_student = form.cleaned_data.get('is_student', False)
+        profile.save()
 
         return response
 

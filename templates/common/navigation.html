@@ -1,19 +1,30 @@
 {% load static %}
 
 <div class="navigation">
+    <!-- Logo -->
     <a href="{% url 'home' %}">
-        <img src="{% static 'images/Logo.png' %}" alt="Fav-Icon">
+        <img src="{% static 'images/Logo.png' %}" alt="UniMatch Logo">
     </a>
 
+    <!-- Navigation Menu -->
     <ul>
+        <!-- Always Visible -->
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'all-unis' %}">All Unis</a></li>
 
         {% if user.is_authenticated %}
+            <!-- Visible to logged-in users -->
             <li><a href="{% url 'profile-details' %}">My Profile</a></li>
-            <li><a href="#">My Uni</a></li>
+
+            {% if user.profile.is_student %}
+                <!-- Visible to logged-in students only -->
+                <li><a href="#">Student Network</a></li>
+            {% endif %}
+
+            <!-- Logout -->
             <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}
+            <!-- Visible to guests -->
             <li><a href="{% url 'login' %}">Login</a></li>
             <li><a href="{% url 'register' %}">Register</a></li>
         {% endif %}

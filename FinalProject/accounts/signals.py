@@ -7,6 +7,11 @@ UserModel = get_user_model()
 
 
 @receiver(post_save, sender=UserModel)
-def create_profile(sender, instance, created, **kwargs):
+def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        # Create the profile only if it doesn't already exist
+        Profile.objects.get_or_create(user=instance)
+    else:
+        # Ensure existing profiles are not reset unnecessarily
+        instance.profile.save()
+

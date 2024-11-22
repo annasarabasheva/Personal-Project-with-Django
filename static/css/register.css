@@ -118,3 +118,24 @@
 .has-account a:hover {
     text-decoration: underline;
 }
+
+.is-student-group {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+.is-student-group label {
+    font-size: 1.1em;
+
+}
