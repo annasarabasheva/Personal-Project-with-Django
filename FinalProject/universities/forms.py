@@ -2,7 +2,7 @@ from django import forms
 from FinalProject.universities.models import University
 
 
-class UniversityCreationForm(forms.ModelForm):
+class UniversityForm(forms.ModelForm):
     class Meta:
         model = University
         fields = ['name', 'country', 'city', 'description', 'logo_url', 'year_established']

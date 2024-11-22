@@ -7,6 +7,7 @@
 }
 
 .uni-card {
+    position: relative; /* To position child elements like the actions relative to this card */
     background-color: #dee9fa;
     display: flex;
     flex-direction: column;
@@ -61,17 +62,22 @@ h2 {
     margin: 0 auto;
 }
 
-.sorry-form {
-    font-size: 35px;
-    text-align: center;
-    padding: 5.5em;
-    background-image: url("../images/empty-hall.jpg");
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
+.uni-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 0.7em;
 }
 
-.sorry-form p {
-    margin-bottom: 1em;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+.action-icon {
+    font-size: 15px;
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.action-icon:hover {
+    transform: scale(1.2);
+    color: #007bff;
 }

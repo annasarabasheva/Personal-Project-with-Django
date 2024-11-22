@@ -1,4 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+
+UserModel = get_user_model()
 
 
 class University(models.Model):
@@ -30,6 +33,14 @@ class University(models.Model):
         null=True,
         blank=True,
         help_text="Year the university was established",
+    )
+
+    created_by = models.OneToOneField(
+        UserModel,
+        on_delete=models.CASCADE,
+        related_name="university",
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
