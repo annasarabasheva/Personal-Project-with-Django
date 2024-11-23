@@ -1,0 +1,88 @@
+.my-university-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3em;
+}
+
+.university-card {
+    background-color: #fff;
+    width: 100%;
+    max-width: 500px;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.university-logo img {
+    width: 55%;
+    height: auto;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.university-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.university-details {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.university-details p {
+    font-size: 20px;
+    margin: 0.5em 0;
+}
+
+.university-details p strong {
+    font-size: 20px;
+    margin-right: 0.5em;
+    color: #1f5ca9;
+}
+
+.university-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button {
+    background-color: #007bff;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.delete-form button {
+    border: none;
+    cursor: pointer;
+}
+
+
+.delete-form button, .button {
+    display: inline-block;
+}

@@ -1,0 +1,41 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="my-university-container">
+    <div class="university-card">
+          <!-- University Name -->
+        <h2 class="university-name">{{ university.name }}</h2>
+
+        <!-- University Logo -->
+        <div class="university-logo">
+            {% if university.logo_url %}
+                <img src="{{ university.logo_url }}" alt="{{ university.name }} Logo">
+            {% else %}
+                <img src="{% static 'images/default-logo.jpg' %}" alt="Default Logo">
+            {% endif %}
+        </div>
+
+        <!-- University Details -->
+        <div class="university-details">
+            <p><strong>Country:</strong> {{ university.country }}</p>
+            <p><strong>City:</strong> {{ university.city }}</p>
+            {% if university.description %}
+                <p><strong>Description:</strong> {{ university.description }}</p>
+            {% endif %}
+            {% if university.year_established %}
+                <p><strong>Year Established:</strong> {{ university.year_established }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Edit/Delete Buttons -->
+        <div class="university-actions">
+            <a href="{% url 'edit-university' %}" class="button edit-button">Edit</a>
+            <form method="POST" action="{% url 'delete-university' %}" class="delete-form">
+                {% csrf_token %}
+                <button type="submit" class="button delete-button">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

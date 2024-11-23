@@ -34,8 +34,10 @@ def all_unis(request):
 
 @login_required
 def add_university(request):
-    if hasattr(request.user, 'university'):
-        return HttpResponseForbidden("You have already added a university.")
+    user_university = University.objects.filter(created_by=request.user).first()
+
+    if user_university:
+        return redirect('my-university', university_id=user_university.id)
 
     if not request.user.profile.is_student:
         return redirect('home')  # Redirect non-student users
@@ -46,7 +48,7 @@ def add_university(request):
             university = form.save(commit=False)
             university.created_by = request.user  # Associate university with the creator
             university.save()
-            return redirect('all-unis')
+            return redirect('my-university')
     else:
         form = UniversityForm()
 
@@ -66,7 +68,7 @@ def edit_university(request):
         form = UniversityForm(request.POST, instance=university)
         if form.is_valid():
             form.save()
-            return redirect('all-unis')
+            return redirect('my-university')
     else:
         form = UniversityForm(instance=university)
 
@@ -84,9 +86,24 @@ def delete_university(request):
 
     if request.method == 'POST' and 'confirm' in request.POST:
         university.delete()
-        return redirect('all-unis')
+        return redirect('my-university')
 
     context = {
         'university': university,
     }
     return render(request, 'universities/delete-university.html', context)
+
+
+@login_required
+def my_university(request):
+    # Fetch the university associated with the logged-in user
+    university = getattr(request.user, 'university', None)
+
+    # If no university is found, show an error or redirect
+    if not university:
+        return HttpResponseForbidden("You don't have a university to view.")
+
+    context = {
+        'university': university,
+    }
+    return render(request, 'universities/my-university.html', context)
