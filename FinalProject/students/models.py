@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from FinalProject.universities.models import University
+
+UserModel = get_user_model()
 
 
 class Student(models.Model):
@@ -51,3 +54,13 @@ class Student(models.Model):
 
     class Meta:
         ordering = ["first_name", "last_name"]
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='sent_messages')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='messages')
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.sender.username} to {self.student.first_name} {self.student.last_name} at {self.timestamp}"

@@ -1,10 +1,15 @@
-
 .students-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
     padding: 2em;
-    background-color: #eef2f7;
+    margin: 0 auto;
+}
+
+.student-card-link {
+    text-decoration: none;
+    color: inherit;
 }
 
 .student-card {
@@ -18,15 +23,17 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 1.5em;
+    padding: 3em;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    flex: 1 1 calc(25% - 2em);
 }
-
 
 .student-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
-
 
 .image-card {
     width: 100px;
@@ -44,7 +51,6 @@
     display: block;
 }
 
-
 .student-info {
     display: flex;
     flex-direction: column;
@@ -54,17 +60,20 @@
 }
 
 .student-info strong {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 600;
     color: #333333;
+    margin-bottom: 0.2em;
 }
 
 .student-info p {
-    font-size: 1em;
+    font-size: 1.1em;
     color: #235285;
     margin: 0;
 }
+
 em {
     margin-right: 0.5em;
     color: #656161;
 }
+

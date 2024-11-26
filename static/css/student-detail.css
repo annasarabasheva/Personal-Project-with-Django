@@ -1,0 +1,166 @@
+/* Main student detail page container */
+.student-detail-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+}
+
+/* Title */
+.student-detail-name {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+/* Student photo */
+.student-detail-photo {
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+/* Info section */
+.student-detail-info {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.student-detail-label {
+    font-size: 1.1em;
+    color: #235285;
+    font-weight: bold;
+}
+
+.student-detail-info p {
+    font-size: 1.3em;
+    color: #2d79d7;
+    margin-bottom: 0.5em;
+}
+.student-detail-info strong {
+    margin-right: 0.5em;
+}
+
+/* Discussion section */
+.student-detail-discussion-title {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 1em;
+
+}
+
+.student-detail-messages {
+    background-color: #d0dff1;
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+    margin-top: 2em;
+}
+
+.student-detail-message {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.student-detail-message-sender {
+    color: #235285;
+    font-weight: bold;
+}
+
+.student-detail-message-content {
+    color: #555;
+    font-size: 1.1em;
+}
+
+.student-detail-message-time {
+    font-size: 0.9em;
+    color: #888;
+    display: block;
+    margin-top: 0.5em;
+}
+
+/* Form section */
+.student-detail-message-form-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 2em;
+}
+
+.student-detail-form {
+    margin-top: 2em;
+    background-color: #edf3fc;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.student-detail-form-fields {
+    margin-bottom: 1.5em;
+}
+
+.student-detail-submit-button {
+    background-color: #719ede;
+    color: white;
+    padding: 0.8em 2em;
+    border: none;
+    border-radius: 13px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.student-detail-form label {
+    display: block;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+.student-detail-form textarea {
+    width: 100%;
+    padding: 1em;
+    font-size: 1.2em;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 160px;
+    margin-bottom: 1.5em;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.student-detail-submit-button:hover {
+    background-color: #4691f3;
+}
+
+/* Login message */
+.student-detail-login-message {
+    font-size: 1.1em;
+    color: #555;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.student-detail-login-link {
+    color: #235285;
+    text-decoration: underline;
+}

@@ -1,0 +1,44 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="student-detail-page">
+        <h2 class="student-detail-name">{{ student.first_name }} {{ student.last_name }}</h2>
+        {% if student.photo %}
+            <img src="{{ student.photo }}" alt="{{ student.first_name }}'s photo" class="student-detail-photo">
+        {% else %}
+            <img src="{% static 'images/default-student.jpeg' %}" alt="Default photo" class="student-detail-photo">
+        {% endif %}
+
+        <div class="student-detail-info">
+            <p><strong class="student-detail-label">University:</strong> {{ student.university.name }}</p>
+            <p><strong class="student-detail-label">Field of study:</strong> {{ student.field_of_study }}</p>
+            <p><strong class="student-detail-label">Year of study:</strong> {{ student.year_of_study }}</p>
+            <p><strong class="student-detail-label">About me:</strong> {{ student.bio }}</p>
+        </div>
+
+        <h3 class="student-detail-discussion-title">Discussion:</h3>
+        <div class="student-detail-messages">
+            {% for message in messages %}
+                <div class="student-detail-message">
+                    <strong class="student-detail-message-sender">{{ message.sender.username }}</strong>:
+                    <span class="student-detail-message-content">{{ message.content }}</span>
+                    <em class="student-detail-message-time">({{ message.timestamp|date:"d M Y" }})</em>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if user.is_authenticated %}
+            <h4 class="student-detail-message-form-title">Send a message:</h4>
+            <form method="post" class="student-detail-form">
+                {% csrf_token %}
+                <div class="student-detail-form-fields">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="student-detail-submit-button">Send</button>
+            </form>
+        {% else %}
+            <p class="student-detail-login-message">You need to <a href="{% url 'login' %}" class="student-detail-login-link">log in</a> to send a message.</p>
+        {% endif %}
+    </div>
+{% endblock %}
