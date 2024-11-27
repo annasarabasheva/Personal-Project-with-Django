@@ -1,4 +1,4 @@
-.create-thread-container {
+.create-category-container {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
@@ -8,13 +8,13 @@
     margin-bottom: 3em;
 }
 
-.create-thread-title {
+.create-category-title {
     font-size: 2rem;
     color: #333;
     margin-bottom: 30px;
 }
 
-.create-thread-form {
+.create-category-form {
     margin-top: 20px;
     text-align: center;
 }
@@ -23,8 +23,8 @@
     margin-bottom: 15px;
 }
 
-.create-thread-submit-button {
-    padding: 15px 25px;
+.create-category-submit-button {
+  padding: 15px 25px;
     background-color: #5b8fe3;
     color: white;
     border: none;
@@ -36,6 +36,6 @@
     display: inline-block;
 }
 
-.create-thread-submit-button:hover {
+.create-category-submit-button:hover {
     background-color: #2e7bdc;
 }

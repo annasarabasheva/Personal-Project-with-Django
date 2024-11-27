@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from FinalProject.forum.forms import PostForm, ThreadForm
+from FinalProject.forum.forms import PostForm, ThreadForm, CategoryForm
 from FinalProject.forum.models import Category, Thread
 
 
@@ -43,3 +43,15 @@ def create_thread(request):
     else:
         form = ThreadForm()
     return render(request, 'forum/create-thread.html', {'form': form})
+
+
+def create_category(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('forum-home')  # Redirect to the forum home page after creating the category
+    else:
+        form = CategoryForm()
+
+    return render(request, 'forum/create-category.html', {'form': form})

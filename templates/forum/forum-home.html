@@ -4,7 +4,13 @@
 <div class="forum-container">
     <h1>Forum</h1>
 
-    <h2>Categories:</h2>
+    <div class="category-new">
+        <h2>Categories:</h2>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'create-category' %}"><i class="fa-solid fa-square-plus"></i></a>
+        {% endif %}
+    </div>
+
     <ul class="forum-category-list">
         {% for category in categories %}
         <li class="forum-category-item">
@@ -13,13 +19,20 @@
         {% endfor %}
     </ul>
 
-    <h2>Recent Threads:</h2>
-    <ul class="forum-thread-list">
-        {% for thread in threads %}
-        <li class="forum-thread-item">
-            <a href="{% url 'thread-detail' thread.id %}" class="forum-thread-link">{{ thread.title }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="recent-threads-container">
+        <div class="thread-new">
+            <h2>Recent Threads:</h2>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'create-thread' %}"><i class="fa-solid fa-square-plus"></i></a>
+            {% endif %}
+        </div>
+        <ul class="forum-thread-list">
+            {% for thread in threads %}
+            <li class="forum-thread-item">
+                <a href="{% url 'thread-detail' thread.id %}" class="forum-thread-link">{{ thread.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="create-category-container">
+    <h1 class="create-category-title">Create a Category</h1>
+    <form method="POST" class="create-category-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="create-category-submit-button">Create</button>
+    </form>
+</div>
+{% endblock %}

@@ -67,3 +67,18 @@
     color: #0073e6;
     font-size: 1.2rem;
 }
+
+.thread-new, .category-new {
+    display: flex;
+    gap: 2em;
+}
+
+.thread-new a, .category-new a {
+    font-size: 1.6em;
+    margin-top: 0.8em;
+    color: #0073e6;
+}
+
+.thread-new a:hover, .category-new a:hover {
+    color: #1f5ca9;
+}
