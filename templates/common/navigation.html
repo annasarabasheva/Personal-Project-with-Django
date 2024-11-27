@@ -11,6 +11,7 @@
         <!-- Always Visible -->
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'all-unis' %}">All Unis</a></li>
+        <li><a href="{% url 'forum-home' %}">Forum</a></li>
 
         {% if user.is_authenticated %}
             <!-- Visible to logged-in users -->

@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<h1>Forum</h1>
+<h2>Categories</h2>
+<ul>
+    {% for category in categories %}
+    <li><a href="{% url 'category-detail' category.id %}">{{ category.name }}</a></li>
+    {% endfor %}
+</ul>
+<h2>Recent Threads</h2>
+<ul>
+    {% for thread in threads %}
+    <li><a href="{% url 'thread-detail' thread.id %}">{{ thread.title }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

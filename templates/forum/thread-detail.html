@@ -1,0 +1,20 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<h1>{{ thread.title }}</h1>
+<p>By {{ thread.author }} on {{ thread.created_at }}</p>
+<hr>
+<h2>Replies</h2>
+<ul>
+    {% for post in posts %}
+    <li>{{ post.content }} - <strong>{{ post.author }}</strong></li>
+    {% endfor %}
+</ul>
+<hr>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Reply</button>
+</form>
+
+{% endblock %}

@@ -22,7 +22,7 @@
         rgba(0, 0, 0, 0.3),
         rgba(0, 0, 0, 0.6)
     ),
-    url("../images/background.jpg");
+    url("../../images/background.jpg");
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;

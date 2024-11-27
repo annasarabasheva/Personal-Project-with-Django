@@ -14,7 +14,9 @@
         </div>
 
         <div class="profile-info">
-            <h1>{{ profile.first_name|default:"First Name" }} {{ profile.last_name|default:"Last Name" }}</h1>
+            {% if profile.first_name and profile.last_name%}
+            <h1>{{ profile.first_name }} {{ profile.last_name}}</h1>
+            {% endif %}
             <p><strong>Username:</strong> {{ profile.user.username }}</p>
             <p><strong>Email:</strong> {{ profile.user.email }}</p>
         </div>

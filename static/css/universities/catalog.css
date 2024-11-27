@@ -83,7 +83,7 @@ h2 {
 }
 
 .sorry-form {
-     background-image: url("../images/empty-hall.jpg");
+     background-image: url("../../images/empty-hall.jpg");
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
