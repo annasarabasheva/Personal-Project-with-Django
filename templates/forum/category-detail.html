@@ -1,12 +1,17 @@
 {% extends 'common/base.html' %}
+
 {% block content %}
+<div class="category-detail-container">
+    <h1 class="category-detail-title">{{ category.name }}</h1>
+    <p class="category-detail-description">{{ category.description }}</p>
 
-<h1>{{ category.name }}</h1>
-<p>{{ category.description }}</p>
-<ul>
-    {% for thread in threads %}
-    <li><a href="{% url 'thread-detail' thread.id %}">{{ thread.title }}</a></li>
-    {% endfor %}
-</ul>
-
+    <h2 class="threads-section-title">Threads in this Category:</h2>
+    <ul class="category-thread-list">
+        {% for thread in threads %}
+        <li class="category-thread-item">
+            <a href="{% url 'thread-detail' thread.id %}" class="category-thread-link">{{ thread.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

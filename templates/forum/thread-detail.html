@@ -1,20 +1,30 @@
 {% extends 'common/base.html' %}
+
 {% block content %}
+<div class="thread-container">
+    <h1 class="thread-title">{{ thread.title }}</h1>
+    <p class="thread-meta">By <span class="thread-author">{{ thread.author }}</span> on <span class="thread-date">{{ thread.created_at }}</span></p>
 
-<h1>{{ thread.title }}</h1>
-<p>By {{ thread.author }} on {{ thread.created_at }}</p>
-<hr>
-<h2>Replies</h2>
-<ul>
-    {% for post in posts %}
-    <li>{{ post.content }} - <strong>{{ post.author }}</strong></li>
-    {% endfor %}
-</ul>
-<hr>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Reply</button>
-</form>
+    <hr class="thread-divider">
 
+    <h2 class="replies-heading">Replies</h2>
+    <ul class="thread-reply-list">
+        {% for post in posts %}
+        <li class="thread-reply-item">
+            <p class="thread-reply-content">{{ post.content }}</p>
+            <p class="thread-reply-author"><strong>{{ post.author }}</strong></p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr class="thread-divider">
+
+    <form method="POST" class="reply-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="reply-submit-button">Reply</button>
+    </form>
+</div>
 {% endblock %}

@@ -1,0 +1,69 @@
+
+.forum-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(222, 233, 250, 0.79);
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+
+.forum-container h1 {
+    font-size: 2.5rem;
+    color: #4a90e2;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.forum-container h2 {
+    font-size: 1.7rem;
+    color: #333;
+    margin-top: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+.forum-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.forum-container ul li {
+    margin: 10px 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.forum-container ul li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.forum-container ul li:hover {
+    background-color: #f0f8ff;
+    transform: scale(1.02);
+}
+
+.forum-container ul li a:hover {
+    color: #0073e6;
+}
+
+.forum-container ul li:before {
+    content: "➤ ";
+    color: #0073e6;
+    font-size: 1.2rem;
+}
