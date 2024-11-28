@@ -1,2 +1,6 @@
-Next step: if user already created his/her uni, he should not be able to create another one.
-Maybe change nav bar in this case or something else, not sure yet
+None-student logged in user functionalities are kinda done but need some other details
+Next step is the logged in student and his/her functionalities:
+    How to connect Student model with logged in student user.
+    Form for Student so the logged in user can add details about his/her profile.
+    Reply to messages in his/her detailed page.
+
