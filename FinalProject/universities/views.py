@@ -14,7 +14,6 @@ def catalog(request):
 
     universities = University.objects.filter(country__icontains=country_query)
 
-
     context = {
         'universities': universities,
         'country_query': country_query,

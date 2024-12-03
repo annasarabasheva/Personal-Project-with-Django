@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from FinalProject.accounts.models import Profile
 from FinalProject.universities.models import University
 
 UserModel = get_user_model()
