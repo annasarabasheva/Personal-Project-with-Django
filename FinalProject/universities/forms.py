@@ -60,3 +60,15 @@ class UniversitySelectionForm(forms.Form):
         widget=forms.URLInput(attrs={'placeholder': 'Logo URL', 'class': 'form-control'})
     )
 
+    def clean(self):
+        cleaned_data = super().clean()
+        new_university_name = cleaned_data.get('new_university_name')
+
+        # If a new university name is provided, check if it's unique
+        if new_university_name:
+            if University.objects.filter(name=new_university_name).exists():
+                print("Duplicate university name found.")
+                raise forms.ValidationError(f"A university with the name '{new_university_name}' already exists.")
+
+        return cleaned_data
+

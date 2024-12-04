@@ -39,6 +39,7 @@ def add_university(request):
     if request.method == 'POST':
         form = UniversitySelectionForm(request.POST)
         if form.is_valid():
+            # Retrieve form data
             existing_university = form.cleaned_data.get('existing_university')
             new_university_name = form.cleaned_data.get('new_university_name')
             country = form.cleaned_data.get('country')
@@ -48,33 +49,40 @@ def add_university(request):
             logo_url = form.cleaned_data.get('logo_url')
 
             if existing_university:
+                # Use selected existing university
                 student.university = existing_university
                 student.save()
                 return redirect('all-unis')
             elif new_university_name:
-                # Create a new university
-                university = University.objects.create(
-                    name=new_university_name,
-                    country=country,
-                    city=city,
-                    description=description,
-                    year_established=year_established,
-                    logo_url=logo_url,
-                    created_by=request.user,
-                )
-                student.university = university
-                student.save()
+                # Check if the university name already exists
+                if University.objects.filter(name=new_university_name).exists():
+                    form.add_error('new_university_name', f"A university with the name '{new_university_name}' already exists.")
+                else:
+                    # Create the new university
+                    university = University.objects.create(
+                        name=new_university_name,
+                        country=country,
+                        city=city,
+                        description=description,
+                        year_established=year_established,
+                        logo_url=logo_url,
+                        created_by=request.user,
+                    )
+                    student.university = university
+                    student.save()
+                    return redirect('all-unis')
             else:
+                # If neither is provided, show an error
                 form.add_error(None, "Please select an existing university or provide a new one.")
-                return render(request, 'universities/add-university.html', {'form': form})
 
-            # Redirect to all universities
-            return redirect('all-unis')
+        # If the form is invalid or the new university name already exists, render the form again with errors
+        return render(request, 'universities/add-university.html', {'form': form})
 
     else:
         form = UniversitySelectionForm()
 
     return render(request, 'universities/add-university.html', {'form': form})
+
 
 @login_required
 def edit_university(request):
