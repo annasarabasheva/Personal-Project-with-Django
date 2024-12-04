@@ -14,4 +14,4 @@ class MessageForm(forms.ModelForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'field_of_study', 'year_of_study', 'location', 'bio', 'photo']

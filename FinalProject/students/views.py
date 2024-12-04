@@ -1,7 +1,7 @@
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from FinalProject.students.forms import MessageForm
+from FinalProject.students.forms import MessageForm, StudentForm
 from FinalProject.students.models import Student
 from FinalProject.universities.models import University
 
@@ -40,3 +40,20 @@ def student_detail(request, student_id):
     }
 
     return render(request, 'students/student-detail.html', context)
+
+
+@login_required
+def student_form_view(request):
+    profile = request.user.profile
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            student = form.save(commit=False)
+            student.profile = profile  # Link the student to the current user's profile
+            student.save()
+            return redirect('add-university')  # Adjust the redirect as needed
+    else:
+        form = StudentForm()
+
+    return render(request, 'students/student-form.html', {'form': form})

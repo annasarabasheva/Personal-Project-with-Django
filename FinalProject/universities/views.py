@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
-from FinalProject.universities.forms import UniversityForm
+from FinalProject.students.models import Student
+from FinalProject.universities.forms import UniversitySelectionForm, UniversityForm
 from FinalProject.universities.models import University
 
 
@@ -33,29 +34,47 @@ def all_unis(request):
 
 @login_required
 def add_university(request):
-    user_university = University.objects.filter(created_by=request.user).first()
-
-    if user_university:
-        return redirect('my-university', university_id=user_university.id)
-
-    if not request.user.profile.is_student:
-        return redirect('home')  # Redirect non-student users
+    student = get_object_or_404(Student, profile=request.user.profile)
 
     if request.method == 'POST':
-        form = UniversityForm(request.POST)
+        form = UniversitySelectionForm(request.POST)
         if form.is_valid():
-            university = form.save(commit=False)
-            university.created_by = request.user  # Associate university with the creator
-            university.save()
-            return redirect('my-university')
+            existing_university = form.cleaned_data.get('existing_university')
+            new_university_name = form.cleaned_data.get('new_university_name')
+            country = form.cleaned_data.get('country')
+            city = form.cleaned_data.get('city')
+            description = form.cleaned_data.get('description')
+            year_established = form.cleaned_data.get('year_established')
+            logo_url = form.cleaned_data.get('logo_url')
+
+            if existing_university:
+                student.university = existing_university
+                student.save()
+                return redirect('all-unis')
+            elif new_university_name:
+                # Create a new university
+                university = University.objects.create(
+                    name=new_university_name,
+                    country=country,
+                    city=city,
+                    description=description,
+                    year_established=year_established,
+                    logo_url=logo_url,
+                    created_by=request.user,
+                )
+                student.university = university
+                student.save()
+            else:
+                form.add_error(None, "Please select an existing university or provide a new one.")
+                return render(request, 'universities/add-university.html', {'form': form})
+
+            # Redirect to all universities
+            return redirect('all-unis')
+
     else:
-        form = UniversityForm()
+        form = UniversitySelectionForm()
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'universities/add-university.html', context)
-
+    return render(request, 'universities/add-university.html', {'form': form})
 
 @login_required
 def edit_university(request):
@@ -67,7 +86,7 @@ def edit_university(request):
         form = UniversityForm(request.POST, instance=university)
         if form.is_valid():
             form.save()
-            return redirect('my-university')
+            return redirect('all-unis')
     else:
         form = UniversityForm(instance=university)
 
@@ -85,7 +104,7 @@ def delete_university(request):
 
     if request.method == 'POST' and 'confirm' in request.POST:
         university.delete()
-        return redirect('my-university')
+        return redirect('all-unis')
 
     context = {
         'university': university,
@@ -93,16 +112,4 @@ def delete_university(request):
     return render(request, 'universities/delete-university.html', context)
 
 
-@login_required
-def my_university(request):
-    # Fetch the university associated with the logged-in user
-    university = getattr(request.user, 'university', None)
 
-    # If no university is found, show an error or redirect
-    if not university:
-        return HttpResponseForbidden("You don't have a university to view.")
-
-    context = {
-        'university': university,
-    }
-    return render(request, 'universities/my-university.html', context)

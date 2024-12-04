@@ -8,10 +8,19 @@ UserModel = get_user_model()
 
 
 class Student(models.Model):
+    profile = models.OneToOneField(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name="student",  # Allows reverse lookup: profile.student
+        help_text="The profile associated with this student",
+    )
+
     university = models.ForeignKey(
         University,
         on_delete=models.CASCADE,
-        related_name="students"
+        related_name="students",
+        null=True,
+        blank=True,
     )
 
     first_name = models.CharField(

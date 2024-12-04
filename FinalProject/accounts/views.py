@@ -34,6 +34,9 @@ class AppUserRegisterView(CreateView):
         profile.is_student = form.cleaned_data.get('is_student', False)
         profile.save()
 
+        if profile.is_student:
+            return redirect('student-form')
+
         return response
 
 

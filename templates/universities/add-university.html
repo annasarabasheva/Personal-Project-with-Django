@@ -1,27 +1,49 @@
 {% extends 'common/base.html' %}
+
 {% block content %}
 <div class="add-university-container">
     <h2>Add Your University</h2>
     <form method="POST">
         {% csrf_token %}
-        
-        <!-- Render Form Fields -->
-        {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-                {% if field.errors %}
-                    <div class="error-message">
-                        {% for error in field.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
+
+        <!-- Existing University Dropdown -->
+        <div class="form-group">
+            <label for="id_existing_university">Select Existing University</label>
+            {{ form.existing_university }}
+        </div>
+
+        <h3>OR</h3>
+
+        <!-- New University Fields -->
+        <div class="form-group">
+            <label for="id_new_university_name">New University Name</label>
+            {{ form.new_university_name }}
+        </div>
+        <div class="form-group">
+            <label for="id_country">Country</label>
+            {{ form.country }}
+        </div>
+        <div class="form-group">
+            <label for="id_city">City</label>
+            {{ form.city }}
+        </div>
+        <div class="form-group">
+            <label for="id_description">Description</label>
+            {{ form.description }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_year_established">Year of Establishment:</label>
+            {{ form.year_established }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_logo_url">University Logo URL:</label>
+            {{ form.logo_url }}
+        </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="submit-button">Add University</button>
+        <button type="submit" class="submit-button">Save University</button>
     </form>
 </div>
 {% endblock %}
