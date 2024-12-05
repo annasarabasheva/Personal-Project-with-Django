@@ -16,6 +16,8 @@
         {% if user.is_authenticated %}
             <!-- Visible to logged-in users -->
             <li><a href="{% url 'profile-details' %}">My Profile</a></li>
+            <li><a href="{% url 'student-detail' request.user.profile.student.id %}">My Student Profile</a></li>
+
             <!-- Logout -->
             <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}
