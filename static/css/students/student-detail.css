@@ -1,5 +1,6 @@
-/* Main student detail page container */
+
 .student-detail-page {
+    position: relative;
     max-width: 900px;
     margin: 0 auto;
     padding: 2em;
@@ -9,7 +10,7 @@
 
 }
 
-/* Title */
+
 .student-detail-name {
     font-size: 2.5em;
     color: #333;
@@ -17,7 +18,6 @@
     margin-bottom: 0.5em;
 }
 
-/* Student photo */
 .student-detail-photo {
     display: block;
     width: 200px;
@@ -30,7 +30,7 @@
     margin-bottom: 2em;
 }
 
-/* Info section */
+
 .student-detail-info {
     margin-bottom: 2em;
     text-align: center;
@@ -51,7 +51,7 @@
     margin-right: 0.5em;
 }
 
-/* Discussion section */
+
 .student-detail-discussion-title {
     font-size: 1.4em;
     color: #333;
@@ -92,7 +92,7 @@
     margin-top: 0.5em;
 }
 
-/* Form section */
+
 .student-detail-message-form-title {
     font-size: 1.4em;
     font-weight: bold;
@@ -152,7 +152,7 @@
     background-color: #4691f3;
 }
 
-/* Login message */
+
 .student-detail-login-message {
     font-size: 1.1em;
     color: #555;
@@ -163,4 +163,37 @@
 .student-detail-login-link {
     color: #235285;
     text-decoration: underline;
+}
+
+.student-detail-actions {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.student-detail-icon {
+    font-size: 28px;
+    color: #555;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.student-detail-icon:hover {
+    color: #007bff;
+}
+
+.delete-icon:hover {
+    color: #dc3545;
+}
+
+.student-detail-delete-form {
+    display: inline-block;
+    margin-left: 0.5em;
+    margin-top: 0.1em;
 }

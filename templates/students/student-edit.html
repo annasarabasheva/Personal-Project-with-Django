@@ -1,0 +1,11 @@
+{% extends 'common/base.html' %}
+{% block content %}
+    <div class="student-form-container">
+        <h2 class="form-heading">Edit Your Student Profile</h2>
+        <form method="post" class="student-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Save Changes</button>
+        </form>
+    </div>
+{% endblock %}

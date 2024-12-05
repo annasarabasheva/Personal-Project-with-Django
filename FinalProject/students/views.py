@@ -43,6 +43,44 @@ def student_detail(request, student_id):
 
 
 @login_required
+def student_edit(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+
+    # Ensure only the owner can edit their profile
+    if student.profile.user != request.user:
+        return redirect('student-detail', student_id=student.id)
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST, request.FILES, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student-detail', student_id=student.id)
+    else:
+        form = StudentForm(instance=student)
+
+    return render(request, 'students/student-edit.html', {'form': form, 'student': student})
+
+
+@login_required
+def student_delete(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+
+    # Ensure only the owner can delete their profile
+    if student.profile.user != request.user:
+        return redirect('student-detail', student_id=student.id)
+
+    if request.method == 'POST':
+        student.delete()
+        profile = request.user.profile
+        profile.is_student = False
+        profile.save()
+
+        return redirect('all-unis')
+
+    return redirect('student-detail', student_id=student.id)
+
+
+@login_required
 def student_form_view(request):
     profile = request.user.profile
 

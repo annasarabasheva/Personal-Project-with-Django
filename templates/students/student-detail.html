@@ -40,5 +40,20 @@
         {% else %}
             <p class="student-detail-login-message">You need to <a href="{% url 'login' %}" class="student-detail-login-link">log in</a> to send a message.</p>
         {% endif %}
+
+        {% if user.is_authenticated and user.profile.student == student %}
+             <div class="student-detail-actions">
+                <a href="{% url 'student-edit' student.id %}" class="student-detail-icon edit-icon" title="Edit Profile">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form method="post" action="{% url 'student-delete' student.id %}" class="student-detail-delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="student-detail-icon delete-icon" title="Delete Profile"
+                            onclick="return confirm('Are you sure you want to delete your profile?')">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
