@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Permission
 from django.contrib.auth.views import LoginView
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -26,7 +28,7 @@ class AppUserRegisterView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        # Auto Login after Register
+        # Auto-login after registration
         login(self.request, self.object)
 
         # Update profile `is_student` value
@@ -35,6 +37,20 @@ class AppUserRegisterView(CreateView):
         profile.save()
 
         if profile.is_student:
+            self.object.is_staff = True
+            self.object.save()
+
+            # Grant permissions for viewing all students and universities
+            student_content_type = ContentType.objects.get(app_label='students', model='student')
+            university_content_type = ContentType.objects.get(app_label='universities', model='university')
+
+            # Grant view permissions for all records
+            view_student_permission = Permission.objects.get(content_type=student_content_type, codename='view_student')
+            view_university_permission = Permission.objects.get(content_type=university_content_type,
+                                                                codename='view_university')
+
+            self.object.user_permissions.add(view_student_permission, view_university_permission)
+
             return redirect('student-form')
 
         return response

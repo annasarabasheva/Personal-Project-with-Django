@@ -18,10 +18,10 @@ class Profile(models.Model):
     is_student = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.first_name
+        # This is a more defensive approach to avoid potential None errors
+        return self.user.username if self.user and hasattr(self.user, 'username') else "Anonymous"
 
     def save(self, *args, **kwargs):
-        print(f"Saving Profile: {self.user.username}, is_student={self.is_student}")
         super().save(*args, **kwargs)
 
 

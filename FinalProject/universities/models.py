@@ -44,7 +44,7 @@ class University(models.Model):
     )
 
     def __str__(self):
-        return f"{self.name}, {self.country}"
+        return self.name if self.name else "Unnamed University"
 
     class Meta:
         ordering = ["name"]
