@@ -71,8 +71,8 @@ class Message(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='messages')
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    parent_message = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
 
     def __str__(self):
-        # This is a more defensive approach to avoid potential None errors
         return self.sender.username if self.sender and hasattr(self.sender, 'username') else "Anonymous"
 

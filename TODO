@@ -1,7 +1,6 @@
-None-student logged in user functionalities are kinda done but need some other details
-Next step is the logged in student and his/her functionalities:
-    How to connect Student model with logged in student user.
-    Form for Student so the logged in user can add details about his/her profile.
-    Reply to messages in his/her detailed page.
-
-keis: ako potrebitel e suzdal universitet ama si trie profila izchezva i universiteta zaedmno s profila i tva e problem
+Fix Permissions for students in admin panel
+Fix Forum
+Error handling
+Class-Based Views - should have at least 5
+Think about making a private chat with student
+Student should be able to reply to messages in his detailed open view

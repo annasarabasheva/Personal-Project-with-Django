@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from FinalProject.students.forms import MessageForm, StudentForm
-from FinalProject.students.models import Student
+from FinalProject.students.models import Student, Message
 from FinalProject.universities.models import University
 
 
@@ -17,29 +17,36 @@ def university_students(request, university_id):
 
 def student_detail(request, student_id):
     student = get_object_or_404(Student, id=student_id)
-    messages = student.messages.all().order_by('timestamp')  # Get all messages related to this student
+    messages = student.messages.filter(parent_message__isnull=True).order_by('timestamp')  # Fetch parent messages only
 
-    # Handle message sending
     if request.method == 'POST' and request.user.is_authenticated:
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            # Create a new message
-            new_message = form.save(commit=False)
-            new_message.sender = request.user
-            new_message.student = student
-            new_message.save()
+        parent_message_id = request.POST.get('parent_message_id')
+        content = request.POST.get('content')
 
-            return redirect('student-detail', student_id=student.id)  # Redirect to avoid duplicate submissions
-    else:
-        form = MessageForm()
+        if parent_message_id:
+            parent_message = get_object_or_404(Message, id=parent_message_id)
+            Message.objects.create(
+                sender=request.user,
+                student=student,
+                parent_message=parent_message,
+                content=content,
+            )
+        else:
+            Message.objects.create(
+                sender=request.user,
+                student=student,
+                content=content,
+            )
+        return redirect('student-detail', student_id=student.id)  # Redirect to avoid duplicate submissions
 
     context = {
         'student': student,
         'messages': messages,
-        'form': form,
+        'form': MessageForm(),
     }
-
     return render(request, 'students/student-detail.html', context)
+
+
 
 
 @login_required

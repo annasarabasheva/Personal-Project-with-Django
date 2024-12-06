@@ -19,24 +19,59 @@
 
         <h3 class="student-detail-discussion-title">Discussion:</h3>
         <div class="student-detail-messages">
-            {% for message in messages %}
-                <div class="student-detail-message">
-                    <strong class="student-detail-message-sender">{{ message.sender.username }}</strong>:
-                    <span class="student-detail-message-content">{{ message.content }}</span>
-                    <em class="student-detail-message-time">({{ message.timestamp|date:"d M Y" }})</em>
-                </div>
-            {% endfor %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="student-detail-message">
+                        <strong class="student-detail-message-sender">{{ message.sender.username }}</strong>:
+                        <span class="student-detail-message-content">{{ message.content }}</span>
+                        <em class="student-detail-message-time">({{ message.timestamp|date:"d M Y" }})</em>
+
+                        {% if user.is_authenticated and user.profile.student == student %}
+                            <!-- Reply button -->
+                            <button class="reply-button" onclick="showReplyForm({{ message.id }})">Reply</button>
+
+                           <!-- Reply form, initially hidden -->
+                            <div class="reply-form" id="reply-form-{{ message.id }}" style="display: none;">
+                                <form method="post" class="student-detail-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="parent_message_id" value="{{ message.id }}">
+                                    <div class="student-detail-form-fields">
+                                        <textarea name="content" rows="3" placeholder="Write your reply..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="student-detail-submit-button">Send</button>
+                                </form>
+                            </div>
+                        {% endif %}
+
+                        <!-- Display Replies -->
+                        <div class="student-detail-replies">
+                            {% for reply in message.replies.all %}
+                                <div class="student-detail-reply">
+                                    <strong class="student-detail-reply-sender">{{ reply.sender.username }}</strong>:
+                                    <span class="student-detail-reply-content">{{ reply.content }}</span>
+                                    <em class="student-detail-reply-time">({{ reply.timestamp|date:"d M Y" }})</em>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+                <p class="no-messages-yet">Looks like no one has said anything yet.</p>
+            {% endif %}
         </div>
 
         {% if user.is_authenticated %}
-            <h4 class="student-detail-message-form-title">Send a message:</h4>
-            <form method="post" class="student-detail-form">
-                {% csrf_token %}
-                <div class="student-detail-form-fields">
-                    {{ form.as_p }}
-                </div>
-                <button type="submit" class="student-detail-submit-button">Send</button>
-            </form>
+            {% if user.profile.student != student %}
+                <h4 class="student-detail-message-form-title">Send a message:</h4>
+                <form method="post" class="student-detail-form">
+                    {% csrf_token %}
+                    <div class="student-detail-form-fields">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="student-detail-submit-button">Send</button>
+                </form>
+            {% endif %}
         {% else %}
             <p class="student-detail-login-message">You need to <a href="{% url 'login' %}" class="student-detail-login-link">log in</a> to send a message.</p>
         {% endif %}
@@ -56,4 +91,15 @@
             </div>
         {% endif %}
     </div>
+
+    <script>
+        function showReplyForm(messageId) {
+            var form = document.getElementById('reply-form-' + messageId);
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+    </script>
 {% endblock %}
