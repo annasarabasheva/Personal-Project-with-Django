@@ -37,7 +37,7 @@ class University(models.Model):
 
     created_by = models.OneToOneField(
         UserModel,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="university",
         null=True,
         blank=True,

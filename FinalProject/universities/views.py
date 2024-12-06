@@ -104,20 +104,5 @@ def edit_university(request):
     return render(request, 'universities/edit-university.html', context)
 
 
-@login_required
-def delete_university(request):
-    university = getattr(request.user, 'university', None)
-    if not university:
-        return HttpResponseForbidden("You don't have a university to delete.")
-
-    if request.method == 'POST' and 'confirm' in request.POST:
-        university.delete()
-        return redirect('all-unis')
-
-    context = {
-        'university': university,
-    }
-    return render(request, 'universities/delete-university.html', context)
-
 
 
