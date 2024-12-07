@@ -83,15 +83,15 @@
 .student-detail-message-content {
     color: #555;
     font-size: 1.1em;
+    margin-right: 10px;
 }
 
-.student-detail-message-time {
+.student-detail-message-time, .student-detail-reply-time {
     font-size: 0.9em;
     color: #888;
-    display: block;
-    margin-top: 0.5em;
+    display: inline;
+    margin-left: 5px;
 }
-
 
 .student-detail-message-form-title {
     font-size: 1.4em;
@@ -214,13 +214,14 @@
 
 .student-detail-message {
     position: relative;
-    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
     min-height: 60px;
     overflow: hidden;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .reply-button {
@@ -234,14 +235,12 @@
     transition: background-color 0.3s ease;
     float: right;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 100%;
 }
 
 .reply-button:hover {
     background-color: #4188e0;
 }
-
 
 .reply-form {
     margin-top: 10px;
@@ -289,4 +288,8 @@
     color: #185cb2;
     font-size: 22px;
     text-align: center;
+}
+.student-detail-reply-sender {
+    color: #275ead;
+
 }

@@ -23,14 +23,16 @@
                 {% for message in messages %}
                     <div class="student-detail-message">
                         <strong class="student-detail-message-sender">{{ message.sender.username }}</strong>:
-                        <span class="student-detail-message-content">{{ message.content }}</span>
+                        <span class="student-detail-message-content">
+                            {{ message.content }}
+                        </span>
                         <em class="student-detail-message-time">({{ message.timestamp|date:"d M Y, h:i a" }})</em>
 
                         {% if user.is_authenticated and user.profile.student == student %}
                             <!-- Reply button -->
                             <button class="reply-button" onclick="showReplyForm({{ message.id }})">Reply</button>
 
-                           <!-- Reply form, initially hidden -->
+                            <!-- Reply form, initially hidden -->
                             <div class="reply-form" id="reply-form-{{ message.id }}" style="display: none;">
                                 <form method="post" class="student-detail-form">
                                     {% csrf_token %}
@@ -47,9 +49,9 @@
                         <div class="student-detail-replies">
                             {% for reply in message.replies.all %}
                                 <div class="student-detail-reply">
-                                    <strong class="student-detail-reply-sender">{{ reply.sender.username }}</strong>:
+                                    <span class="student-detail-reply-sender">{{ reply.sender.username }}</span>:
                                     <span class="student-detail-reply-content">{{ reply.content }}</span>
-                                    <em class="student-detail-reply-time">({{ reply.timestamp|date:"d M Y, H:i p" }})</em>
+                                    <em class="student-detail-reply-time">({{ reply.timestamp|date:"d M Y, h:i p" }})</em>
                                 </div>
                             {% endfor %}
                         </div>
