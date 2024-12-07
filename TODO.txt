@@ -1,5 +1,4 @@
 Fix Permissions for students in admin panel
-Fix Forum
 Error handling
 Think about making a private chat with student
 Hide secret key, database settings and private stuff from project and put it in .env file that should be ignored by GitHub - the lector said we can also use decouple library for that so i should look at it

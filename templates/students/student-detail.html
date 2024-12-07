@@ -24,7 +24,7 @@
                     <div class="student-detail-message">
                         <strong class="student-detail-message-sender">{{ message.sender.username }}</strong>:
                         <span class="student-detail-message-content">{{ message.content }}</span>
-                        <em class="student-detail-message-time">({{ message.timestamp|date:"d M Y" }})</em>
+                        <em class="student-detail-message-time">({{ message.timestamp|date:"d M Y, h:i a" }})</em>
 
                         {% if user.is_authenticated and user.profile.student == student %}
                             <!-- Reply button -->
@@ -49,7 +49,7 @@
                                 <div class="student-detail-reply">
                                     <strong class="student-detail-reply-sender">{{ reply.sender.username }}</strong>:
                                     <span class="student-detail-reply-content">{{ reply.content }}</span>
-                                    <em class="student-detail-reply-time">({{ reply.timestamp|date:"d M Y" }})</em>
+                                    <em class="student-detail-reply-time">({{ reply.timestamp|date:"d M Y, H:i p" }})</em>
                                 </div>
                             {% endfor %}
                         </div>

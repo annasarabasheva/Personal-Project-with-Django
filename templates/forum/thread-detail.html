@@ -8,14 +8,22 @@
     <hr class="thread-divider">
 
     <h2 class="replies-heading">Replies</h2>
-    <ul class="thread-reply-list">
+
+    {% if posts %}
+    <div class="replies-container">
         {% for post in posts %}
-        <li class="thread-reply-item">
-            <p class="thread-reply-content">{{ post.content }}</p>
-            <p class="thread-reply-author"><strong>{{ post.author }}</strong></p>
-        </li>
+        <div class="reply-card">
+            <p class="reply-content">{{ post.content }}</p>
+            <div class="reply-author-info">
+                <p class="reply-author">By: <strong> {{ post.author }}</strong></p>
+                <p class="reply-date">{{ post.created_at }}</p>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+    {% else %}
+    <p class="no-replies-message">No replies yet. Be the first to reply!</p>
+    {% endif %}
 
     <hr class="thread-divider">
 
