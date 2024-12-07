@@ -1,4 +1,5 @@
 from django.urls import path
+
 from FinalProject.common.views import HomePageView
 
 urlpatterns = [
