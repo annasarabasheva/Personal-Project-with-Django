@@ -1,13 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Permission
 from django.contrib.auth.views import LoginView
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, get_object_or_404, render
-from django.urls import reverse_lazy
-from django.views.generic import CreateView
-
+from django.urls import reverse_lazy, reverse
+from django.views import View
+from django.views.generic import CreateView, DetailView, UpdateView
 from FinalProject.accounts.forms import AppUserCreationForm, ProfileEditForm
 from FinalProject.accounts.models import Profile
 
@@ -56,47 +56,44 @@ class AppUserRegisterView(CreateView):
         return response
 
 
-def my_profile(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
+class ProfileDetailView(LoginRequiredMixin, DetailView):
+    model = Profile
+    template_name = 'accounts/profile-details-page.html'
+    context_object_name = 'profile'
 
-    profile = get_object_or_404(Profile, user=request.user)
-
-    context = {
-        'profile': profile,
-    }
-    return render(request, 'accounts/profile-details-page.html', context)
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user=self.request.user)
 
 
-@login_required
-def edit_profile(request):
-    profile = get_object_or_404(Profile, user=request.user)
+class ProfileEditView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileEditForm
+    template_name = 'accounts/profile-edit-page.html'
 
-    if request.method == 'POST':
-        form = ProfileEditForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile-details')  # Adjust this to your actual profile detail URL
-    else:
-        form = ProfileEditForm(instance=profile)
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user=self.request.user)
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'accounts/profile-edit-page.html', context)
+    def get_success_url(self):
+        return reverse('profile-details')
 
 
-@login_required
-def delete_profile(request):
-    profile = get_object_or_404(Profile, user=request.user)
+class ProfileDeleteView(LoginRequiredMixin, View):
+    template_name = 'accounts/profile-delete-page.html'
 
-    if request.method == 'POST' and 'confirm' in request.POST:
-        user = request.user
-        profile.delete()
-        user.delete()
+    def get_object(self):
+        return get_object_or_404(Profile, user=self.request.user)
 
-        logout(request)
-        messages.success(request, "Your profile has been successfully deleted.")
-        return redirect('home')
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
 
-    return render(request, 'accounts/profile-delete-page.html')
+    def post(self, request, *args, **kwargs):
+        if 'confirm' in request.POST:
+            profile = self.get_object()
+            user = request.user
+            profile.delete()
+            user.delete()
+
+            logout(request)
+            messages.success(request, "Your profile has been successfully deleted.")
+            return redirect('home')
+        return render(request, self.template_name)

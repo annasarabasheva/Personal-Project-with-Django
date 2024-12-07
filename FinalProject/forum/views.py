@@ -1,57 +1,71 @@
-from django.shortcuts import render, get_object_or_404, redirect
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, DetailView, CreateView
 from FinalProject.forum.forms import PostForm, ThreadForm, CategoryForm
 from FinalProject.forum.models import Category, Thread
 
 
-def forum_home(request):
-    categories = Category.objects.all()
-    threads = Thread.objects.order_by('-updated_at')[:10]
-    return render(request, 'forum/forum-home.html', {'categories': categories, 'threads': threads})
+class ForumHomeView(TemplateView):
+    template_name = 'forum/forum-home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['threads'] = Thread.objects.order_by('-updated_at')[:10]
+        return context
 
 
-def category_detail(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    threads = category.thread_set.order_by('-updated_at')
-    return render(request, 'forum/category-detail.html', {'category': category, 'threads': threads})
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'forum/category-detail.html'
+    context_object_name = 'category'
+    pk_url_kwarg = 'category_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['threads'] = self.object.thread_set.order_by('-updated_at')
+        return context
 
 
-def thread_detail(request, thread_id):
-    thread = get_object_or_404(Thread, id=thread_id)
-    posts = thread.posts.all()
-    if request.method == "POST":
+class ThreadDetailView(DetailView):
+    model = Thread
+    template_name = 'forum/thread-detail.html'
+    context_object_name = 'thread'
+    pk_url_kwarg = 'thread_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.object.posts.all()
+        context['form'] = PostForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.thread = thread
+            post.thread = self.object
             post.save()
-            return redirect('thread-detail', thread_id=thread.id)
-    else:
-        form = PostForm()
-    return render(request, 'forum/thread-detail.html', {'thread': thread, 'posts': posts, 'form': form})
+            return redirect('thread-detail', thread_id=self.object.id)
+        return self.render_to_response(self.get_context_data(form=form))
 
 
-def create_thread(request):
-    if request.method == "POST":
-        form = ThreadForm(request.POST)
-        if form.is_valid():
-            thread = form.save(commit=False)
-            thread.author = request.user
-            thread.save()
-            return redirect('thread-detail', thread_id=thread.id)
-    else:
-        form = ThreadForm()
-    return render(request, 'forum/create-thread.html', {'form': form})
+class CreateThreadView(LoginRequiredMixin, CreateView):
+    model = Thread
+    form_class = ThreadForm
+    template_name = 'forum/create-thread.html'
+
+    def form_valid(self, form):
+        thread = form.save(commit=False)
+        thread.author = self.request.user
+        thread.save()
+        return redirect('thread-detail', thread_id=thread.id)
 
 
-def create_category(request):
-    if request.method == "POST":
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('forum-home')  # Redirect to the forum home page after creating the category
-    else:
-        form = CategoryForm()
-
-    return render(request, 'forum/create-category.html', {'form': form})
+class CreateCategoryView(LoginRequiredMixin, CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'forum/create-category.html'
+    success_url = reverse_lazy('forum-home')

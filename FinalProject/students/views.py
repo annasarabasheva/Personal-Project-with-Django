@@ -47,8 +47,6 @@ def student_detail(request, student_id):
     return render(request, 'students/student-detail.html', context)
 
 
-
-
 @login_required
 def student_edit(request, student_id):
     student = get_object_or_404(Student, id=student_id)

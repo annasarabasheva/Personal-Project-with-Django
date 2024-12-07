@@ -1,11 +1,11 @@
 from django.urls import path
-
-from FinalProject.forum import views
+from FinalProject.forum.views import ForumHomeView, CategoryDetailView, ThreadDetailView, CreateThreadView, \
+    CreateCategoryView
 
 urlpatterns = [
-    path('', views.forum_home, name='forum-home'),
-    path('category/<int:category_id>/', views.category_detail, name='category-detail'),
-    path('thread/<int:thread_id>/', views.thread_detail, name='thread-detail'),
-    path('thread/create/', views.create_thread, name='create-thread'),
-    path('category/create/', views.create_category, name='create-category'),
+    path('', ForumHomeView.as_view(), name='forum-home'),
+    path('category/<int:category_id>/', CategoryDetailView.as_view(), name='category-detail'),
+    path('thread/<int:thread_id>/', ThreadDetailView.as_view(), name='thread-detail'),
+    path('thread/create/', CreateThreadView.as_view(), name='create-thread'),
+    path('category/create/', CreateCategoryView.as_view(), name='create-category'),
 ]
