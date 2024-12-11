@@ -20,6 +20,7 @@ class University(models.Model):
 
     description = models.TextField(
         blank=True,
+        null=True,
         help_text="Short description of the university",
     )
 
@@ -39,12 +40,12 @@ class University(models.Model):
         UserModel,
         on_delete=models.SET_NULL,
         related_name="university",
-        null=True,
         blank=True,
+        null=True,
     )
 
     def __str__(self):
-        return self.name if self.name else "Unnamed University"
+        return self.name
 
     class Meta:
         ordering = ["name"]

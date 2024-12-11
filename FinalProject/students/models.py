@@ -34,19 +34,15 @@ class Student(models.Model):
         max_length=150,
     )
 
-    year_of_study = models.PositiveIntegerField(
-        help_text="Current year of study (e.g., 1, 2, 3, etc.)"
-    )
+    year_of_study = models.PositiveIntegerField()
 
     location = models.CharField(
         max_length=100,
-        help_text="City or region where you are currently based",
     )
 
     bio = models.TextField(
         blank=True,
         null=True,
-        help_text="A short bio for you as a student"
     )
 
     photo = models.URLField(

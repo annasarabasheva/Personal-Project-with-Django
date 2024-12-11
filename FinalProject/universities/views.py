@@ -56,7 +56,7 @@ def add_university(request):
             elif new_university_name:
                 # Check if the university name already exists
                 if University.objects.filter(name=new_university_name).exists():
-                    form.add_error('new_university_name', f"A university with the name '{new_university_name}' already exists.")
+                    form.add_error('new_university_name', f"'{new_university_name}' already exists.")
                 else:
                     # Create the new university
                     university = University.objects.create(
@@ -72,10 +72,10 @@ def add_university(request):
                     student.save()
                     return redirect('all-unis')
             else:
-                # If neither is provided, show an error
+                # General error for missing university selection
                 form.add_error(None, "Please select an existing university or provide a new one.")
 
-        # If the form is invalid or the new university name already exists, render the form again with errors
+        # Render the form with errors (if any)
         return render(request, 'universities/add-university.html', {'form': form})
 
     else:
