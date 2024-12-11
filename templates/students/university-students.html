@@ -18,7 +18,9 @@
                         <strong>{{ student.first_name }} {{ student.last_name }}</strong>
                         <p>📚 <em>Field of study:</em> {{ student.field_of_study }}</p>
                         <p>📅 <em>Year of Study:</em> {{ student.year_of_study }}</p>
-                        <p>🧑‍ <em>About me:</em> {{ student.bio }}</p>
+                        {% if student.bio %}
+                            <p>🧑‍ <em>About me:</em> {{ student.bio }}</p>
+                        {% endif %}
                     </div>
                 </div>
             </a>

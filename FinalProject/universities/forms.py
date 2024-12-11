@@ -4,6 +4,10 @@ from django.core.exceptions import ValidationError
 from FinalProject.universities.models import University
 
 
+from django import forms
+from FinalProject.universities.models import University
+
+
 class UniversityForm(forms.ModelForm):
     class Meta:
         model = University
@@ -17,6 +21,12 @@ class UniversityForm(forms.ModelForm):
             'logo_url': forms.URLInput(attrs={'placeholder': 'Logo URL'}),
             'year_established': forms.NumberInput(attrs={'placeholder': 'Year Established'}),
         }
+
+    def clean_year_established(self):
+        year_established = self.cleaned_data.get('year_established')
+        if year_established and year_established < 1000:
+            raise forms.ValidationError('Year of establishment must be a valid year.')
+        return year_established
 
 
 class UniversitySelectionForm(forms.Form):

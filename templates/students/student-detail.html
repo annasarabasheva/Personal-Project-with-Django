@@ -14,7 +14,9 @@
             <p><strong class="student-detail-label">University:</strong> {{ student.university.name }}</p>
             <p><strong class="student-detail-label">Field of study:</strong> {{ student.field_of_study }}</p>
             <p><strong class="student-detail-label">Year of study:</strong> {{ student.year_of_study }}</p>
-            <p><strong class="student-detail-label">About me:</strong> {{ student.bio }}</p>
+            {% if student.bio %}
+                <p><strong class="student-detail-label">About me:</strong> {{ student.bio }}</p>
+            {% endif %}
         </div>
 
         <h3 class="student-detail-discussion-title">Discussion:</h3>

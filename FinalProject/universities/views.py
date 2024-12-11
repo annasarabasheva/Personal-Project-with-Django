@@ -94,14 +94,15 @@ def edit_university(request):
         form = UniversityForm(request.POST, instance=university)
         if form.is_valid():
             form.save()
-            return redirect('all-unis')
+            return redirect('all-unis')  # Redirect to the list of universities
     else:
         form = UniversityForm(instance=university)
 
     context = {
-        'form': form,
+        'form': form,  # Pass the form (with errors if any) to the template
     }
     return render(request, 'universities/edit-university.html', context)
+
 
 
 
