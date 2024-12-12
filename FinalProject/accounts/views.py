@@ -1,9 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import LoginView
-from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse_lazy, reverse
 from django.views import View
@@ -40,17 +39,11 @@ class AppUserRegisterView(CreateView):
             self.object.is_staff = True
             self.object.save()
 
-            # Grant permissions for viewing all students and universities
-            student_content_type = ContentType.objects.get(app_label='students', model='student')
-            university_content_type = ContentType.objects.get(app_label='universities', model='university')
+            # Add the user to the "Student Group"
+            student_group, created = Group.objects.get_or_create(name='Student Group')
+            self.object.groups.add(student_group)
 
-            # Grant view permissions for all records
-            view_student_permission = Permission.objects.get(content_type=student_content_type, codename='view_student')
-            view_university_permission = Permission.objects.get(content_type=university_content_type,
-                                                                codename='view_university')
-
-            self.object.user_permissions.add(view_student_permission, view_university_permission)
-
+            # Redirect to student form if the user registers as a student
             return redirect('student-form')
 
         return response

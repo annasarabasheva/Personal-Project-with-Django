@@ -4,21 +4,15 @@ from FinalProject.students.models import Student, Message
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'university', 'field_of_study', 'year_of_study')
-    search_fields = ('first_name', 'last_name', 'field_of_study')
-    list_filter = ('university', 'year_of_study')
-    ordering = ('first_name', 'last_name')
+    list_display = ['first_name', 'last_name', 'field_of_study', 'university']
 
     def get_queryset(self, request):
-        queryset = super().get_queryset(request)
+        qs = super().get_queryset(request)
         if request.user.is_superuser:
-            return queryset
-        return queryset.filter(profile__user=request.user)
-
-    def has_change_permission(self, request, obj=None):
-        if obj is not None and obj.profile.user != request.user:
-            return False
-        return super().has_change_permission(request, obj)
+            return qs
+        if request.user.is_staff:
+            return qs.filter(profile__user=request.user)
+        return qs.none()
 
 
 @admin.register(Message)
