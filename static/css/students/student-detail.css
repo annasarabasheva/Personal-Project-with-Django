@@ -293,3 +293,60 @@
     color: #275ead;
 
 }
+
+/* Styling the stars container */
+.stars {
+    display: inline-flex;
+    gap: 8px; /* Add space between stars */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Base star style */
+.star {
+    font-size: 2rem;
+    color: #ccc; /* Light gray for unselected stars */
+    transition: transform 0.2s ease, color 0.2s ease; /* Smooth animations */
+}
+
+/* Hover effect */
+.star.hover {
+    color: #fcbf49; /* Yellow for hover state */
+    transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+/* Filled state for selected stars */
+.star.filled {
+    color: #fcc84b; /* Bright orange for selected stars */
+}
+
+
+.rating {
+    position: absolute; /* Place it inside the student container */
+    top: 16px;
+    left: 16px;
+    padding: 16px;
+    width: 300px;
+    font-size: 1.1em;
+}
+
+
+/* Ensure the container has a relative positioning for absolute child placement */
+.student-detail-page {
+    position: relative; /* This ensures the rating stays within the container */
+}
+
+#user-rating {
+    margin-top: 10px;
+}
+
+.rating-submit {
+    margin-top: 16px; /* Space between "Your Rating" and the button */
+    text-align: center;
+}
+
+.rating p:last-of-type {
+    margin-top: 0.8em;
+}

@@ -1,5 +1,2 @@
-Fix Permissions for students in admin panel
-Error handling - did it for some things, but django is overriding a lot of the things, and it's not working for everything
 
-* Think like functionality for student/how helpful was he/she
 * Hide secret key, database settings and private stuff from project and put it in .env file that should be ignored by GitHub - the lector said we can also use decouple library for that so i should look at it

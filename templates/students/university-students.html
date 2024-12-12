@@ -16,6 +16,13 @@
                     </div>
                     <div class="student-info">
                         <strong>{{ student.first_name }} {{ student.last_name }}</strong>
+                        <div class="student-rating">
+                            <div class="stars">
+                                {% for i in star_range %}
+                                    <span class="star {% if i <= student.average_rating %}filled{% endif %}">&#9733;</span>
+                                {% endfor %}
+                            </div>
+                        </div>
                         <p>📚 <em>Field of study:</em> {{ student.field_of_study }}</p>
                         <p>📅 <em>Year of Study:</em> {{ student.year_of_study }}</p>
                         {% if student.bio %}
@@ -27,3 +34,4 @@
         {% endfor %}
     </div>
 {% endblock %}
+

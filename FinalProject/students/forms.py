@@ -36,4 +36,3 @@ class StudentForm(forms.ModelForm):
             'bio': forms.TextInput(attrs={'placeholder': 'Give us some interesting facts about you...'}),
             'photo': forms.URLInput(attrs={'placeholder': 'Share a photo of you if you want...'}),
         }
-

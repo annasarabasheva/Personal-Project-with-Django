@@ -1,29 +1,41 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 from FinalProject.students.forms import MessageForm, StudentForm
-from FinalProject.students.models import Student, Message
+from FinalProject.students.models import Student, Message, Rating
 from FinalProject.universities.models import University
 
 
 def university_students(request, university_id):
     university = get_object_or_404(University, id=university_id)
-    students = university.students.all()
+    students = university.students.annotate(average_rating=Avg('ratings__stars'))  # Annotate with average_rating
+
     return render(request, 'students/university-students.html', {
         'university': university,
         'students': students,
+        'star_range': range(1, 6),
     })
 
 
 def student_detail(request, student_id):
     student = get_object_or_404(Student, id=student_id)
-    messages = student.messages.filter(parent_message__isnull=True).order_by('timestamp')  # Fetch parent messages only
+    messages = student.messages.filter(parent_message__isnull=True).order_by('timestamp')
+
+    # Ensure average_rating is rounded or cast to an int
+    average_rating = int(student.average_rating())
+
+    # Provide a range for 1 to 5 stars
+    star_range = range(1, 6)
 
     if request.method == 'POST' and request.user.is_authenticated:
-        parent_message_id = request.POST.get('parent_message_id')
-        content = request.POST.get('content')
+        # Process message form
+        parent_message_id = request.POST.get('parent_message_id')  # Check for a parent message
+        content = request.POST.get('content')  # Message content
 
         if parent_message_id:
+            # Handle replies
             parent_message = get_object_or_404(Message, id=parent_message_id)
             Message.objects.create(
                 sender=request.user,
@@ -32,19 +44,26 @@ def student_detail(request, student_id):
                 content=content,
             )
         else:
+            # Handle new messages
             Message.objects.create(
                 sender=request.user,
                 student=student,
                 content=content,
             )
-        return redirect('student-detail', student_id=student.id)  # Redirect to avoid duplicate submissions
+
+        # Redirect to avoid form resubmission
+        return redirect('student-detail', student_id=student.id)
 
     context = {
         'student': student,
         'messages': messages,
         'form': MessageForm(),
+        'average_rating': average_rating,
+        'star_range': star_range,
     }
     return render(request, 'students/student-detail.html', context)
+
+
 
 
 @login_required
@@ -100,3 +119,30 @@ def student_form_view(request):
         form = StudentForm()
 
     return render(request, 'students/student-form.html', {'form': form})
+
+
+@login_required
+def rate_student(request, student_id):
+    if request.method == 'POST':
+        try:
+            stars = int(request.POST.get('stars', 0))
+            if stars < 1 or stars > 5:
+                return JsonResponse({'error': 'Invalid rating value.'}, status=400)
+
+            student = get_object_or_404(Student, id=student_id)
+            if student.profile.user == request.user:
+                return JsonResponse({'error': 'You cannot rate yourself.'}, status=403)
+
+            rating, created = Rating.objects.update_or_create(
+                student=student,
+                user=request.user,
+                defaults={'stars': stars}
+            )
+
+            average_rating = student.average_rating()
+            return JsonResponse({'message': 'Rating submitted successfully.', 'average_rating': average_rating})
+        except Exception as e:
+            print(f"Error: {e}")  # Log the error
+            return JsonResponse({'error': 'An unexpected error occurred.'}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)

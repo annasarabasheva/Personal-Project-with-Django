@@ -50,6 +50,12 @@ class Student(models.Model):
         null=True,
     )
 
+    def average_rating(self):
+        ratings = self.ratings.all()
+        if ratings.exists():
+            return sum(rating.stars for rating in ratings) / ratings.count()
+        return 0
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -67,3 +73,12 @@ class Message(models.Model):
     def __str__(self):
         return self.sender.username if self.sender and hasattr(self.sender, 'username') else "Anonymous"
 
+
+class Rating(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='given_ratings')
+    stars = models.PositiveIntegerField(default=0)  # Rating between 1 and 5
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('student', 'user')

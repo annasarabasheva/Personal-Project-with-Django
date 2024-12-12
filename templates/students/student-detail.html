@@ -3,6 +3,25 @@
 
 {% block content %}
     <div class="student-detail-page">
+        <div class="rating">
+            <p>Average Rating:</p>
+            <div id="average-rating" class="stars">
+                {% for i in star_range %}
+                    <span class="star {% if i <= average_rating %}filled{% endif %}" data-star="{{ i }}">&#9733;</span>
+                {% endfor %}
+            </div>
+
+            {% if user.is_authenticated and user != student.profile.user %}
+                <p>Rate {{ student.first_name }}'s Helpfulness:</p>
+                <div id="user-rating" class="stars">
+                    {% for i in star_range %}
+                        <span class="star" data-star="{{ i }}">&#9733;</span>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="rating-value" value="0">
+            {% endif %}
+        </div>
+
         <h2 class="student-detail-name">{{ student.first_name }} {{ student.last_name }}</h2>
         {% if student.photo %}
             <img src="{{ student.photo }}" alt="{{ student.first_name }}'s photo" class="student-detail-photo">
@@ -53,7 +72,7 @@
                                 <div class="student-detail-reply">
                                     <span class="student-detail-reply-sender">{{ reply.sender.username }}</span>:
                                     <span class="student-detail-reply-content">{{ reply.content }}</span>
-                                    <em class="student-detail-reply-time">({{ reply.timestamp|date:"d M Y, h:i p" }})</em>
+                                    <em class="student-detail-reply-time">({{ reply.timestamp|date:"d M Y, h:i a" }})</em>
                                 </div>
                             {% endfor %}
                         </div>
@@ -105,5 +124,60 @@
                 form.style.display = 'none';
             }
         }
+
+
+        document.querySelectorAll('#user-rating .star').forEach(star => {
+            star.addEventListener('mouseover', function () {
+                const starValue = this.getAttribute('data-star');
+                document.querySelectorAll('#user-rating .star').forEach(s => {
+                    s.classList.toggle('hover', s.getAttribute('data-star') <= starValue);
+                });
+            });
+
+            star.addEventListener('mouseout', function () {
+                document.querySelectorAll('#user-rating .star').forEach(s => s.classList.remove('hover'));
+            });
+
+            star.addEventListener('click', function () {
+                const starValue = this.getAttribute('data-star');
+                document.getElementById('rating-value').value = starValue;
+
+                // Highlight the selected stars
+                document.querySelectorAll('#user-rating .star').forEach(s => {
+                    s.classList.toggle('filled', s.getAttribute('data-star') <= starValue);
+                });
+
+                // Submit the rating immediately
+                const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                const studentId = {{ student.id }};
+
+                fetch(`/students/${studentId}/rate/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrfToken,
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `stars=${starValue}`,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.average_rating) {
+                            alert('Please confirm your rating');
+                            document.querySelectorAll('#average-rating .star').forEach(star => {
+                                const starValue = star.getAttribute('data-star');
+                                star.classList.toggle('filled', starValue <= data.average_rating);
+                            });
+                        } else {
+                            alert(data.error || 'Failed to submit rating.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while submitting your rating.');
+                    });
+            });
+        });
+
+
     </script>
 {% endblock %}
