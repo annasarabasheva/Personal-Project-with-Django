@@ -1,5 +1,8 @@
-from django.test import TestCase
 
+from django.test import TestCase, Client
+from django.urls import reverse
+
+from FinalProject.students.models import Student
 from FinalProject.universities.forms import UniversityForm, UniversitySelectionForm
 from FinalProject.universities.models import University
 from django.contrib.auth import get_user_model
@@ -7,7 +10,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class UniversityModelTest(TestCase):
+class UniversityModelTest(TestCase):  # Tests for University Model
     def setUp(self):
         # Create a user to test the `created_by` field
         self.user = User.objects.create_user(
@@ -73,7 +76,7 @@ class UniversityModelTest(TestCase):
         self.assertIsNone(university.created_by)
 
 
-class UniversityFormTest(TestCase):
+class UniversityFormTest(TestCase):  # Tests for UniversityForm
     def test_valid_form(self):
         """Test that a valid form is accepted."""
         form_data = {
@@ -134,7 +137,7 @@ class UniversityFormTest(TestCase):
         self.assertTrue(form.is_valid())
 
 
-class UniversitySelectionFormTest(TestCase):
+class UniversitySelectionFormTest(TestCase):  # Tests for UniversitySelectionForm
     def setUp(self):
         # Set up a sample university for testing
         self.university = University.objects.create(
@@ -200,3 +203,60 @@ class UniversitySelectionFormTest(TestCase):
         }
         form = UniversitySelectionForm(data=form_data)
         self.assertTrue(form.is_valid())
+
+
+class UniversityIntegrationTests(TestCase): # Integration test for add_university and edit_university views
+    def setUp(self):
+        # Create a test user and student
+        self.user = User.objects.create_user(username="testuser", email="test@example.com", password="testpassword")
+        self.student = Student.objects.create(
+            profile=self.user.profile,
+            first_name="John",
+            last_name="Doe",
+            field_of_study="Computer Science",
+            year_of_study=2,
+            location="New York",
+            bio="Test student bio.",
+        )
+
+        # Create an existing university for testing
+        self.existing_university = University.objects.create(
+            name="Existing University",
+            country="Test Country",
+            city="Test City",
+            year_established=1985,
+        )
+
+        # Log in the test user
+        self.client = Client()
+        self.client.login(username="testuser", password="testpassword")
+
+    # Test for add_university
+    def test_add_new_university(self):
+        """Test successfully adding a new university."""
+        response = self.client.post(reverse("add-university"), {
+            "new_university_name": "New University",
+            "country": "New Country",
+            "city": "New City",
+            "year_established": 2000,
+            "description": "A new university for testing.",
+            "logo_url": "http://example.com/logo.png",
+        })
+        self.assertEqual(response.status_code, 302)  # Redirect on success
+        self.assertTrue(University.objects.filter(name="New University").exists())
+        self.student.refresh_from_db()
+        self.assertEqual(self.student.university.name, "New University")
+
+    def test_add_existing_university_to_student(self):
+        """Test associating an existing university with a student."""
+        response = self.client.post(reverse("add-university"), {
+            "existing_university": self.existing_university.id,
+        })
+        self.assertEqual(response.status_code, 302)  # Redirect on success
+        self.student.refresh_from_db()
+        self.assertEqual(self.student.university, self.existing_university)
+
+    def test_edit_university_no_access(self):
+        """Test forbidden access when no university is associated with the user."""
+        response = self.client.get(reverse("edit-university"))
+        self.assertEqual(response.status_code, 403)  # Forbidden access

@@ -105,5 +105,3 @@ def edit_university(request):
 
 
 
-
-
