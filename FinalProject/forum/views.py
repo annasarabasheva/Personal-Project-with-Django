@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.http import JsonResponse
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, DetailView, CreateView
 from FinalProject.forum.forms import PostForm, ThreadForm, CategoryForm
-from FinalProject.forum.models import Category, Thread
+from FinalProject.forum.models import Category, Thread, Post
 
 
 class ForumHomeView(TemplateView):
@@ -69,3 +70,18 @@ class CreateCategoryView(LoginRequiredMixin, CreateView):
     form_class = CategoryForm
     template_name = 'forum/create-category.html'
     success_url = reverse_lazy('forum-home')
+
+
+def like_post(request, post_id):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'You must be logged in to like a post.'}, status=403)
+
+    post = get_object_or_404(Post, id=post_id)
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)  # Unlike
+        liked = False
+    else:
+        post.likes.add(request.user)  # Like
+        liked = True
+
+    return JsonResponse({'liked': liked, 'like_count': post.like_count()})

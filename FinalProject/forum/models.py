@@ -30,6 +30,11 @@ class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="posts")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(UserModel, related_name="liked_posts", blank=True)
+
+    def like_count(self):
+        return self.likes.count()
 
     def __str__(self):
         return f"Post by {self.author} in {self.thread.title}"
+
