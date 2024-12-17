@@ -1,10 +1,12 @@
+
 .profile-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 80vh;
-    background-color: #f0f4fa;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #dee9fa 0%, #719ede 100%);
     padding: 2em;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .profile-card {
@@ -12,12 +14,16 @@
     width: 100%;
     max-width: 600px;
     border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     text-align: center;
     padding: 2em;
-    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
 
 .profile-picture {
     margin-bottom: 1.5em;
@@ -29,25 +35,20 @@
     border-radius: 50%;
 }
 
-.profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #5a67d8;
-}
-
-
 .profile-info h1 {
-    font-size: 1.8em;
+    font-size: 2em;
     color: #333333;
     margin-bottom: 0.5em;
 }
 
 .profile-info p {
     font-size: 1.1em;
-    color: #666666;
-    margin: 0.5em 0;
+    color: #555555;
+    margin: 0.3em 0;
+}
+
+.profile-info strong {
+    color: #5a67d8;
 }
 
 .profile-actions {
@@ -58,7 +59,7 @@
 }
 
 .button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.8em 1.5em;
@@ -70,12 +71,14 @@
     border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
-
 }
 
 .button:hover {
     background-color: #434c9c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
 .button:active {
@@ -84,9 +87,66 @@
 
 .delete-button {
     background-color: #d9534f;
-    font-family: "DM Serif Display", serif;
 }
 
 .delete-button:hover {
     background-color: #c9302c;
+}
+
+.activity-summary {
+    margin-top: 2em;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 1.5em;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    animation: slideIn 1s ease-in-out;
+}
+
+.activity-summary h2 {
+    font-size: 1.6em;
+    color: #333333;
+    margin-bottom: 1em;
+    text-align: center;
+    border-bottom: 2px solid #5a67d8;
+    padding-bottom: 0.5em;
+}
+
+.activity-summary p {
+    font-size: 1.1em;
+    color: #555555;
+    margin: 0.5em 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-summary strong {
+    color: #007bff;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
