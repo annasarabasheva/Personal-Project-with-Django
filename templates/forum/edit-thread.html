@@ -1,0 +1,14 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="create-thread-container">
+    <h1 class="create-thread-title">Edit a Thread</h1>
+    <form method="POST" class="create-thread-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="create-thread-submit-button">Edit</button>
+    </form>
+</div>
+{% endblock %}

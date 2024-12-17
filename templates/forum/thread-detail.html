@@ -2,10 +2,19 @@
 
 {% block content %}
 <div class="thread-container">
-    <h1 class="thread-title">{{ thread.title }}</h1>
-    <p class="thread-meta">By <span class="thread-author">{{ thread.author }}</span> on <span class="thread-date">{{ thread.created_at }}</span></p>
-
-    <hr class="thread-divider">
+    <div class="thread-header">
+        <h1 class="thread-title">{{ thread.title }}</h1>
+        {% if request.user == thread.author %}
+            <div class="thread-actions">
+                <a href="{% url 'thread-edit' thread.id %}" class="thread-edit-button">✏️ Edit</a>
+                <a href="{% url 'thread-delete' thread.id %}" class="thread-delete-button">🗑️ Delete</a>
+            </div>
+        {% endif %}
+    </div>
+    <p class="thread-meta">
+        By <span class="thread-author">{{ thread.author }}</span> on
+        <span class="thread-date">{{ thread.created_at }}</span>
+    </p>
 
     <h2 class="replies-heading">Replies</h2>
 

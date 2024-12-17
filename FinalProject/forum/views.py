@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, DetailView, CreateView
+from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
 from FinalProject.forum.forms import PostForm, ThreadForm, CategoryForm
 from FinalProject.forum.models import Category, Thread, Post
 
@@ -52,6 +52,29 @@ class ThreadDetailView(DetailView):
             post.save()
             return redirect('thread-detail', thread_id=self.object.id)
         return self.render_to_response(self.get_context_data(form=form))
+
+
+class ThreadEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Thread
+    form_class = ThreadForm
+    template_name = 'forum/edit-thread.html'
+
+    def get_success_url(self):
+        return reverse_lazy('thread-detail', kwargs={'thread_id': self.object.id})
+
+    def test_func(self):
+        thread = self.get_object()
+        return self.request.user == thread.author
+
+
+class ThreadDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Thread
+    template_name = 'forum/delete-thread.html'
+    success_url = reverse_lazy('forum-home')
+
+    def test_func(self):
+        thread = self.get_object()
+        return self.request.user == thread.author
 
 
 class CreateThreadView(LoginRequiredMixin, CreateView):
