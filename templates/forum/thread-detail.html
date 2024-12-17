@@ -18,16 +18,17 @@
                     <p class="reply-author">By: <strong>{{ post.author }}</strong></p>
                     <p class="reply-date">{{ post.created_at }}</p>
                 </div>
-                <!-- Like Button -->
-                <div class="like-container">
-                    <button class="like-button" data-post-id="{{ post.id }}">
-                        <span class="like-text">{% if request.user in post.likes.all %}❤️{% else %}🤍{% endif %}</span>
-                    </button>
-                    <span class="like-count" id="like-count-{{ post.id }}">
-                        {{ post.like_count }}
-                    </span>
-                    <span>likes</span>
-                </div>
+                {% if request.user.is_authenticated %}
+                    <div class="like-container">
+                        <button class="like-button" data-post-id="{{ post.id }}">
+                            <span class="like-text">{% if request.user in post.likes.all %}❤️{% else %}🤍{% endif %}</span>
+                        </button>
+                        <span class="like-count" id="like-count-{{ post.id }}">
+                            {{ post.like_count }}
+                        </span>
+                        <span>likes</span>
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

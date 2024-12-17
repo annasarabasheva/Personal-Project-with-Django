@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import redirect, get_object_or_404
@@ -72,9 +73,8 @@ class CreateCategoryView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('forum-home')
 
 
+@login_required
 def like_post(request, post_id):
-    if not request.user.is_authenticated:
-        return JsonResponse({'error': 'You must be logged in to like a post.'}, status=403)
 
     post = get_object_or_404(Post, id=post_id)
     if request.user in post.likes.all():
