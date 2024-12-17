@@ -1,6 +1,6 @@
 # 🎓 UniMatch: Student Forum Platform 🎓
 
-UniMatch is a web-based platform built with the **Django Framework** to connect future students with current university students. The application allows users to interact through forums, create threads, reply to posts, and get guidance about universities.
+UniMatch is a web-based platform built with the **Django Framework** to connect future students with current university students. The application allows users to interact through forums and direct messages and get guidance about universities.
 
 ---
 ## 🌟 What Exactly is the Project About?
@@ -15,11 +15,11 @@ The platform promotes collaboration and knowledge sharing through forums and dir
 ### Public Part
 - **Home Page**: A welcoming introduction to the platform, where users can search for universities based on the selected country using a search bar.
 - **All Unis Page**: Users can view details about each university, including location, description, and related information.
-- **University-students Page**: User can see all students from specific university by clicking on it with small information about each student.
-- **Student Detail Page**: User can see detailed information about specific student and see his/hers discussions with other users but won't be able to rate or post a message to the student.
-- **Forum Page** : Displays categories, threads and posts in an organized format. Users without accounts would only be able to view them, any other action is not allowed for them.
+- **University-students Page**: User can see all students from specific university by clicking on it and will see small information about each student.
+- **Student Detail Page**: User can see detailed information about specific student and see his/her discussions with other users but won't be able to rate or post a message to the student.
+- **Forum Page** : Displays categories, threads and posts in an organized format. Users without accounts will only be able to view them, any other action is not allowed for them.
 - **Login Page**: Allows existing users to log in with their username and password.
-- **Register Page**: Enables new users to create an account by providing a username, email. Additionally, users can indicate if they are current students by checking the "Are you a student ?" box at the end of the registration form.
+- **Register Page**: Enables new users to create an account by providing a username, email and password. Additionally, users can indicate if they are current students by checking the "Are you a student ?" box at the end of the registration form.
 
 ### Private Part (if authenticated user is not a student)
 - **My Profile Page**: Users can view their personal profile information, including their activity summary (threads created, posts made, and likes received). They can also edit or delete their profile.
@@ -27,9 +27,9 @@ The platform promotes collaboration and knowledge sharing through forums and dir
 - **Student Detail Page**: Provides detailed information about specific students, this time user is able to message and rate the student's helpfulness.
 - **Logout Page**: Allows users to log out of the application.
 
-### Private Part (if authenticated user is a student)
-- **Student Form**: After registration, if the user checked the box 'Are you a student ?', he/she will be redirected to fill additional information about his/her student details.
-- **University Form**: After filling the Student form,  user will be redirected to fill the University form, where he/she will give information about their current university if this university doesn't already exist in out database.
+### Private Part (additional information if authenticated user is a student)
+- **Student Form**: After registration, if the user checked the box 'Are you a student ?', he/she will be redirected to fill in additional information about his/her student details.
+- **University Form**: After filling the Student form,  user will be redirected to fill in the University form, where he/she will give information about their current university if this university doesn't already exist in our database.
 - **My Student Profile Page**: Authenticated student can reply on messages from logged-in users, edit and delete his/her profile.
 
 ## ✨ Features Section
@@ -57,7 +57,7 @@ The platform promotes collaboration and knowledge sharing through forums and dir
 
   - **`accounts/`**: (User Management):
     - - **`management/commands/create_student_group.py`**: A custom management command to create or update a group called "Student Group" with appropriate permissions.
-    - - **`migrations/`**: Auto-generated migration files for student-related models.
+    - - **`migrations/`**: Auto-generated migration files for account-related models.
     - - **`models/`**: Defines custom user models and profiles.
     - - **`views.py`**: Handles user registration, login, logout, and profile management.
     - - **`forms.py`**: Contains forms for user registration and profile updates.
@@ -71,10 +71,10 @@ The platform promotes collaboration and knowledge sharing through forums and dir
     - - **`urls.py`**: URL routing for common-related views.
 
   - **`forum/`**: (Forum Functionality):
-    - - **`migrations/`**: Auto-generated migration files for student-related models.
+    - - **`migrations/`**: Auto-generated migration files for forum-related models.
     - - **`models/`**: Defines following models: Category, Thread, Post.
     - - **`views.py`**: Handles CRUD operations for categories, threads and posts.
-    - - **`forms.py`**: Contains forms for category, thread and post.
+    - - **`forms.py`**: Contains forms for categories, threads and posts.
     - - **`urls.py`**: URL routing for forum-related views.
     - - **`admin.py`**: Admin site customization for Thread, Post and Category.
 
@@ -88,7 +88,7 @@ The platform promotes collaboration and knowledge sharing through forums and dir
     - - **`admin.py`**: Admin site customization for Student and Message.
     
   - **`universities/`**: (University Information):
-    - - **`migrations/`**: Auto-generated migration files for student-related models.
+    - - **`migrations/`**: Auto-generated migration files for university-related models.
     - - **`models/`**: Defines University model.
     - - **`views.py`**: Handles CRUD operations for universities.
     - - **`forms.py`**: Contains forms for existing and new universities.
@@ -113,12 +113,14 @@ The platform promotes collaboration and knowledge sharing through forums and dir
 - **`requirements.txt`**: Lists all required dependencies to run the project.
 
 
+
 ## 🛠️ **Technologies Used**
 - **Backend**: Django 4.2
 - **Database**: PostgreSQL
 - **Frontend**: HTML, CSS, JavaScript
 - **Styling**: Custom CSS
 - **Environment Management**: `python-decouple` (for secure credentials)
+
 
 
 ## 🚀 Getting Started
@@ -152,7 +154,6 @@ To get started with this project, follow these steps:
     Create a .env file in the root directory, and if you have the necessary credentials and configurations ready, add them securely to the file.
 
 
-
 5. **Set Up the Database**:
     Apply database migrations to create the necessary tables:
     ```bash
@@ -166,18 +167,13 @@ To get started with this project, follow these steps:
     ```bash
     python manage.py createsuperuser
     ```
+   
 
-7. **Create a Superuser**:
-    To access the Django Admin panel, create a superuser account:
-    ```bash
-    python manage.py createsuperuser
-    ``
-
-8. **Run the Development Server**:
+7. **Run the Development Server**:
     Start the Django development server:
     ```bash
     python manage.py runserver
-    ``
+    ```
   After starting the server, open your web browser and go to:
   http://127.0.0.1:8000/  
 
