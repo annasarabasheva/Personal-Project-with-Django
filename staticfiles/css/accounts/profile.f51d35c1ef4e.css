@@ -1,0 +1,152 @@
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #dee9fa 0%, #719ede 100%);
+    padding: 2em;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.profile-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 2em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.profile-picture {
+    margin-bottom: 1.5em;
+}
+
+.profile-picture img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.profile-info h1 {
+    font-size: 2em;
+    color: #333333;
+    margin-bottom: 0.5em;
+}
+
+.profile-info p {
+    font-size: 1.1em;
+    color: #555555;
+    margin: 0.3em 0;
+}
+
+.profile-info strong {
+    color: #5a67d8;
+}
+
+.profile-actions {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8em 1.5em;
+    font-size: 1em;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #5a67d8;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: #434c9c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.button:active {
+    transform: scale(0.95);
+}
+
+.delete-button {
+    background-color: #d9534f;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}
+
+.activity-summary {
+    margin-top: 2em;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 1.5em;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    animation: slideIn 1s ease-in-out;
+}
+
+.activity-summary h2 {
+    font-size: 1.6em;
+    color: #333333;
+    margin-bottom: 1em;
+    text-align: center;
+    border-bottom: 2px solid #5a67d8;
+    padding-bottom: 0.5em;
+}
+
+.activity-summary p {
+    font-size: 1.1em;
+    color: #555555;
+    margin: 0.5em 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-summary strong {
+    color: #007bff;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

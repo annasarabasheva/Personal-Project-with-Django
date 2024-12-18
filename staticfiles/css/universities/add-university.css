@@ -1,0 +1,85 @@
+/* General Form Container */
+.add-university-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #dee9fa;
+    border-radius: 9px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.36);
+}
+
+/* Heading */
+.add-university-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+/* Input Fields */
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 13px;
+    font-size: 15px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Input Focus State */
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Error Messages */
+.error-message {
+    margin-top: 5px;
+    color: #d9534f;
+    font-size: 13px;
+}
+
+.submit-button {
+    display: inline-block;
+    width: auto;
+    padding: 1em;
+    font-size: 17px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+.add-university-container form {
+    text-align: center;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+

@@ -1,0 +1,100 @@
+.uni-container {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    padding: 2em;
+    flex-wrap: wrap;
+}
+
+.uni-card {
+    position: relative;
+    background-color: #dee9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 270px;
+    text-align: center;
+    padding: 1em;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.uni-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.uni-logo {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.3em;
+}
+
+.year {
+    margin-bottom: 0.7em;
+}
+
+.uni-card p:last-of-type {
+    margin-top: 0.5em;
+}
+
+h2 {
+    text-align: center;
+    font-family: "Satisfy", cursive;
+    font-size: 35px;
+    margin-bottom: 0.1em;
+}
+
+.uni-card a {
+    margin-top: 0.5em;
+    font-family: "Satisfy", cursive;
+    font-size: 23px;
+    text-decoration: none;
+    color: #853010;
+}
+
+.uni-card a img {
+    margin: 0 auto;
+}
+
+.uni-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 0.7em;
+}
+
+.action-icon {
+    font-size: 15px;
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.action-icon:hover {
+    transform: scale(1.2);
+    color: #007bff;
+}
+
+.sorry-form {
+     background-image: url("../../images/empty-hall.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    filter: grayscale(5%) brightness(95%);
+    padding-top: 5em;
+    padding-bottom: 13em;
+}
+.sorry-form p {
+    font-size: 45px;
+    font-family: "Satisfy", cursive;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 0.7em;
+}

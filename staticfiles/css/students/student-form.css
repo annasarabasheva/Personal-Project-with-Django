@@ -1,0 +1,61 @@
+
+.student-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #dee9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 30px;
+}
+
+
+.form-heading {
+    text-align: center;
+    font-size: 29px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+
+.student-form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.student-form p {
+    margin-bottom: 20px;
+}
+
+
+.student-form input, .student-form select, .student-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+
+.student-form input:hover, .student-form select:hover, .student-form textarea:hover {
+    border-color: #007BFF;
+}
+
+
+.submit-button {
+    padding: 12px 20px;
+    background-color: #5e9be7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.submit-button:hover {
+    background-color: #4188e0;
+}

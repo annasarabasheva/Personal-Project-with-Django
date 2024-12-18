@@ -1,0 +1,352 @@
+
+.student-detail-page {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+}
+
+
+.student-detail-name {
+    font-size: 2.5em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.student-detail-photo {
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+
+.student-detail-info {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.student-detail-label {
+    font-size: 1.1em;
+    color: #235285;
+    font-weight: bold;
+}
+
+.student-detail-info p {
+    font-size: 1.3em;
+    color: #2d79d7;
+    margin-bottom: 0.5em;
+}
+.student-detail-info strong {
+    margin-right: 0.5em;
+}
+
+
+.student-detail-discussion-title {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 1em;
+
+}
+
+.student-detail-messages {
+    background-color: #d0dff1;
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+    margin-top: 2em;
+}
+
+.student-detail-message {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.student-detail-message-sender {
+    color: #235285;
+    font-weight: bold;
+}
+
+.student-detail-message-content {
+    color: #555;
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+.student-detail-message-time, .student-detail-reply-time {
+    font-size: 0.9em;
+    color: #888;
+    display: inline;
+    margin-left: 5px;
+}
+
+.student-detail-message-form-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 2em;
+}
+
+.student-detail-form {
+    margin-top: 2em;
+    background-color: #edf3fc;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.student-detail-form-fields {
+    margin-bottom: 1.5em;
+}
+
+.student-detail-submit-button {
+    background-color: #719ede;
+    color: white;
+    padding: 0.8em 2em;
+    border: none;
+    border-radius: 13px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.student-detail-form label {
+    display: block;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+.student-detail-form textarea {
+    width: 100%;
+    padding: 1em;
+    font-size: 1.2em;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 160px;
+    margin-bottom: 1.5em;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.student-detail-submit-button:hover {
+    background-color: #4691f3;
+}
+
+
+.student-detail-login-message {
+    font-size: 1.1em;
+    color: #555;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.student-detail-login-link {
+    color: #235285;
+    text-decoration: underline;
+}
+
+.student-detail-actions {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.student-detail-icon {
+    font-size: 28px;
+    color: #555;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.student-detail-icon:hover {
+    color: #007bff;
+}
+
+.delete-icon:hover {
+    color: #dc3545;
+}
+
+.student-detail-delete-form {
+    display: inline-block;
+    margin-left: 0.5em;
+    margin-top: 0.1em;
+}
+
+.reply-form {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+.student-detail-reply {
+    margin-left: 20px;
+    padding-left: 10px;
+    border-left: 3px solid #ccc;
+    margin-top: 10px;
+}
+
+.student-detail-message {
+    position: relative;
+    border: 1px solid #ddd;
+    min-height: 60px;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.reply-button {
+    background-color: #5e9be7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    float: right;
+    position: relative;
+    top: 100%;
+}
+
+.reply-button:hover {
+    background-color: #4188e0;
+}
+
+.reply-form {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    animation: fadeIn 0.3s ease;
+}
+
+.reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reply-form textarea:focus {
+    border-color: #4188e0;
+    box-shadow: 0 0 5px rgb(113, 158, 222);
+    outline: none;
+}
+
+.student-detail-submit-button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    max-width: 100px;
+}
+
+.student-detail-submit-button:hover {
+    background-color: #0b7dda;
+}
+
+.no-messages-yet {
+    color: #185cb2;
+    font-size: 22px;
+    text-align: center;
+}
+.student-detail-reply-sender {
+    color: #275ead;
+
+}
+
+/* Styling the stars container */
+.stars {
+    display: inline-flex;
+    gap: 8px; /* Add space between stars */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Base star style */
+.star {
+    font-size: 2rem;
+    color: #ccc; /* Light gray for unselected stars */
+    transition: transform 0.2s ease, color 0.2s ease; /* Smooth animations */
+}
+
+/* Hover effect */
+.star.hover {
+    color: #fcbf49; /* Yellow for hover state */
+    transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+/* Filled state for selected stars */
+.star.filled {
+    color: #fcc84b; /* Bright orange for selected stars */
+}
+
+
+.rating {
+    position: absolute; /* Place it inside the student container */
+    top: 16px;
+    left: 16px;
+    padding: 16px;
+    width: 300px;
+    font-size: 1.1em;
+}
+
+
+/* Ensure the container has a relative positioning for absolute child placement */
+.student-detail-page {
+    position: relative; /* This ensures the rating stays within the container */
+}
+
+#user-rating {
+    margin-top: 10px;
+}
+
+.rating-submit {
+    margin-top: 16px; /* Space between "Your Rating" and the button */
+    text-align: center;
+}
+
+.rating p:last-of-type {
+    margin-top: 0.8em;
+}

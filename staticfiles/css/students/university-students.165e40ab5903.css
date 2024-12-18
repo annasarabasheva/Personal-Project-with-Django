@@ -1,0 +1,77 @@
+.students-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+    padding: 2em;
+    margin: 0 auto;
+}
+
+.student-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.student-card {
+    background-color: #ffffff;
+    border: 1px solid #dfe3e8;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2em;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    flex: 1 1 calc(25% - 2em);
+}
+
+.student-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.image-card {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1em;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.student-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.student-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+    text-align: center;
+}
+
+.student-info strong {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #333333;
+}
+
+.student-info p {
+    font-size: 1.2em;
+    color: #235285;
+    margin: 0;
+}
+
+em {
+    margin-right: 0.5em;
+    color: #656161;
+}
