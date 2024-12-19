@@ -18,12 +18,6 @@ class University(models.Model):
         max_length=100,
     )
 
-    description = models.TextField(
-        blank=True,
-        null=True,
-        help_text="Short description of the university",
-    )
-
     logo_url = models.URLField(
         blank=True,
         null=True,

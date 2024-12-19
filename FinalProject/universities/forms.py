@@ -11,13 +11,12 @@ from FinalProject.universities.models import University
 class UniversityForm(forms.ModelForm):
     class Meta:
         model = University
-        fields = ['name', 'country', 'city', 'description', 'logo_url', 'year_established']
+        fields = ['name', 'country', 'city', 'logo_url', 'year_established']
 
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'University Name'}),
             'country': forms.TextInput(attrs={'placeholder': 'Country'}),
             'city': forms.TextInput(attrs={'placeholder': 'City'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Short description of the university'}),
             'logo_url': forms.URLInput(attrs={'placeholder': 'Logo URL'}),
             'year_established': forms.NumberInput(attrs={'placeholder': 'Year Established'}),
         }
@@ -55,11 +54,7 @@ class UniversitySelectionForm(forms.Form):
         label="City",
         widget=forms.TextInput(attrs={'placeholder': 'City...', 'class': 'form-control'}),
     )
-    description = forms.CharField(
-        required=False,
-        widget=forms.Textarea(attrs={'placeholder': 'Short description of the university', 'class': 'form-control'}),
-        label="Description",
-    )
+
     year_established = forms.IntegerField(
         required=False,
         label="Year Established",

@@ -12,7 +12,6 @@ User = get_user_model()
 
 class StudentIntegrationTests(TestCase): # Integration tests for Student model
     def setUp(self):
-        # Create unique user and profile
         self.user, _ = User.objects.get_or_create(
             username="testuser1",
             email="testuser1@example.com",
@@ -20,7 +19,6 @@ class StudentIntegrationTests(TestCase): # Integration tests for Student model
         )
         self.profile, _ = Profile.objects.get_or_create(user=self.user)
 
-        # Create a test university
         self.university = University.objects.create(
             name="Test University",
             country="Test Country",
@@ -36,7 +34,6 @@ class StudentIntegrationTests(TestCase): # Integration tests for Student model
         University.objects.all().delete()
 
     def test_create_student_with_university(self):
-        """Test creating a student with a university."""
         student = Student.objects.create(
             profile=self.profile,
             university=self.university,
@@ -54,7 +51,6 @@ class StudentIntegrationTests(TestCase): # Integration tests for Student model
         self.assertEqual(student.field_of_study, "Computer Science")
 
     def test_create_student_without_university(self):
-        """Test creating a student without a university."""
         student = Student.objects.create(
             profile=self.profile,
             university=None,  # No university
@@ -70,7 +66,6 @@ class StudentIntegrationTests(TestCase): # Integration tests for Student model
         self.assertEqual(student.field_of_study, "Biology")
 
     def test_cascade_delete_student_with_profile(self):
-        """Test that deleting a profile cascades and deletes the associated student."""
         student = Student.objects.create(
             profile=self.profile,
             university=self.university,
@@ -80,16 +75,13 @@ class StudentIntegrationTests(TestCase): # Integration tests for Student model
             year_of_study=3,
             location="Los Angeles",
         )
-        # Delete the profile
         self.profile.delete()
-        # The student should also be deleted
         with self.assertRaises(Student.DoesNotExist):
             Student.objects.get(pk=student.pk)
 
 
 class StudentFormTests(TestCase):  # Integration tests for StudentForm
     def test_valid_form(self):
-        """Test that a valid form is accepted."""
         form_data = {
             'first_name': 'John',
             'last_name': 'Doe',
@@ -103,12 +95,11 @@ class StudentFormTests(TestCase):  # Integration tests for StudentForm
         self.assertTrue(form.is_valid())
 
     def test_invalid_year_of_study(self):
-        """Test that a negative year_of_study raises a validation error."""
         form_data = {
             'first_name': 'Jane',
             'last_name': 'Doe',
             'field_of_study': 'Mathematics',
-            'year_of_study': -1,  # Invalid year
+            'year_of_study': -1,
             'location': 'Boston',
             'bio': 'A curious mathematician.',
             'photo': 'http://example.com/photo.jpg',
@@ -125,21 +116,18 @@ class StudentFormTests(TestCase):  # Integration tests for StudentForm
 class StudentViewsIntegrationTests(TestCase):  # Integration test for edit, delete and detail student views
     @classmethod
     def setUpTestData(cls):
-        # Shared setup for all tests
         cls.user = User.objects.create_user(username="testuser", email="test@example.com", password="password123")
 
-        # Avoid duplicate Profile creation by checking existence or creating explicitly
         if not hasattr(cls.user, 'profile'):
             cls.profile = Profile.objects.create(user=cls.user)
 
         cls.university = University.objects.create(name="Test University", country="Test Country", city="Test City")
 
     def setUp(self):
-        # Test-specific setup
         self.client = Client()
         self.client.login(username="testuser", password="password123")
         self.student = Student.objects.create(
-            profile=self.user.profile,  # Link the profile created in `setUpTestData`
+            profile=self.user.profile,
             first_name="Test",
             last_name="Student",
             field_of_study="Computer Science",
@@ -150,7 +138,6 @@ class StudentViewsIntegrationTests(TestCase):  # Integration test for edit, dele
         )
 
     def test_student_detail_view(self):
-        """Test that the student detail view renders correctly."""
         url = reverse("student-detail", args=[self.student.id])
         response = self.client.get(url)
 
@@ -159,7 +146,6 @@ class StudentViewsIntegrationTests(TestCase):  # Integration test for edit, dele
         self.assertContains(response, "Computer Science")
 
     def test_student_edit_view(self):
-        """Test that only the student owner can edit the profile."""
         url = reverse("student-edit", args=[self.student.id])
         response = self.client.get(url)
 
@@ -179,17 +165,16 @@ class StudentViewsIntegrationTests(TestCase):  # Integration test for edit, dele
         }
         response = self.client.post(url, data)
 
-        self.assertEqual(response.status_code, 302)  # Redirect on success
+        self.assertEqual(response.status_code, 302)
         self.student.refresh_from_db()
         self.assertEqual(self.student.first_name, "Updated")
         self.assertEqual(self.student.field_of_study, "Data Science")
 
     def test_student_delete_view(self):
-        """Test that the student profile can be deleted."""
         url = reverse("student-delete", args=[self.student.id])
         response = self.client.post(url)
 
-        self.assertEqual(response.status_code, 302)  # Redirect on success
+        self.assertEqual(response.status_code, 302)
         with self.assertRaises(Student.DoesNotExist):
             Student.objects.get(id=self.student.id)
 

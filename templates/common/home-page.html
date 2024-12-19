@@ -44,10 +44,11 @@
     </form>
 
     <p>2️⃣. Next, explore all universities in our system and view the students profiles.</p>
+    <p>3️⃣. Finally, connect with students and receive personalized advice just for you.</p>
     <div class="first-step">
-
-        <p>3️⃣. Finally, connect with students and receive personalized advice just for you.</p>
+        {% if not request.user.is_authenticated %}
         <p>Already enrolled? <a href="{% url 'register' %}">Join the student network.</a></p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

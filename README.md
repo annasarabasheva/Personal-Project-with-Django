@@ -1,8 +1,10 @@
 # 🎓 UniMatch: Student Forum Platform 🎓
 
 UniMatch is a web-based platform built with the **Django Framework** to connect future students with current university students. The application allows users to interact through forums and direct messages and get guidance about universities.
-
----
+## 🚀 Here you can find a link to my deployed project: 
+  ```bash
+    https://unimatchapp.azurewebsites.net/
+   ```
 ## 🌟 What Exactly is the Project About?
 UniMatch aims to provide a community-driven space where:
 
@@ -125,7 +127,7 @@ The platform promotes collaboration and knowledge sharing through forums and dir
 
 ## 🚀 Getting Started
 
-To get started with this project, follow these steps:
+To run the project locally on your machine, follow these steps:
 
 1. **Clone the Repository**:
     Download the project code to your local machine using Git.

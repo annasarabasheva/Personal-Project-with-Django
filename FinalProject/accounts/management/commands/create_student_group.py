@@ -10,10 +10,8 @@ class Command(BaseCommand):
     help = "Creates or updates the 'Student Group' with permissions for Students, Universities, Categories, Threads, and Posts"
 
     def handle(self, *args, **kwargs):
-        # Create the group
         student_group, created = Group.objects.get_or_create(name='Student Group')
 
-        # Define permissions
         student_permissions = [
             Permission.objects.get(content_type=ContentType.objects.get_for_model(Student), codename='view_student'),
         ]
@@ -41,7 +39,6 @@ class Command(BaseCommand):
             Permission.objects.get(content_type=ContentType.objects.get_for_model(Post), codename='delete_post'),
         ]
 
-        # Combine all permissions
         all_permissions = (
             student_permissions +
             university_permissions +
@@ -50,7 +47,6 @@ class Command(BaseCommand):
             post_permissions
         )
 
-        # Assign permissions to the group
         student_group.permissions.set(all_permissions)
         student_group.save()
 

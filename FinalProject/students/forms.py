@@ -14,7 +14,7 @@ class MessageForm(forms.ModelForm):
 
 class StudentForm(forms.ModelForm):
     year_of_study = forms.IntegerField(
-        min_value=1,  # Enforces a minimum value
+        min_value=1,
         error_messages={
             'min_value': "Year of study must be greater than or equal to 1.",
             'invalid': "Enter a valid year of study.",
@@ -34,5 +34,5 @@ class StudentForm(forms.ModelForm):
             }),
             'location': forms.TextInput(attrs={'placeholder': 'Where is your university located...'}),
             'bio': forms.TextInput(attrs={'placeholder': 'Give us some interesting facts about you...'}),
-            'photo': forms.URLInput(attrs={'placeholder': 'Share a photo of you if you want...'}),
+            'photo': forms.URLInput(attrs={'placeholder': 'Show URL photo of yourself if you want...'}),
         }

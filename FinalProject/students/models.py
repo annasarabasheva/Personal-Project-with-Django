@@ -77,7 +77,7 @@ class Message(models.Model):
 class Rating(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='ratings')
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='given_ratings')
-    stars = models.PositiveIntegerField(default=0)  # Rating between 1 and 5
+    stars = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

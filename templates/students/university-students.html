@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <h2>Students at {{ university.name }}</h2>
+    <h2 class="all-unis-h2">Students at {{ university.name }}</h2>
     <div class="students-container">
         {% for student in students %}
             <a href="{% url 'student-detail' student.id %}" class="student-card-link">
@@ -25,9 +25,6 @@
                         </div>
                         <p>📚 <em>Field of study:</em> {{ student.field_of_study }}</p>
                         <p>📅 <em>Year of Study:</em> {{ student.year_of_study }}</p>
-                        {% if student.bio %}
-                            <p>🧑‍ <em>About me:</em> {{ student.bio }}</p>
-                        {% endif %}
                     </div>
                 </div>
             </a>

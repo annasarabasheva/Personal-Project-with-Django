@@ -15,31 +15,27 @@ class AppUserChangeForm(UserChangeForm):
 
 class AppUserCreationForm(UserCreationForm):
     is_student = forms.BooleanField(
-        required=False,  # Optional field
+        required=False,
         label="Are you a student?",
         help_text="Check this if you are currently a student."
     )
 
     class Meta(UserCreationForm.Meta):
         model = UserModel
-        fields = ('email', 'username')  # Include fields for User model
+        fields = ('email', 'username')
 
     def save(self, commit=True):
         user = super().save(commit=False)
 
         if commit:
-            user.save()  # Save the user instance first
+            user.save()
 
-            # Get or create the profile associated with the user
             profile, created = Profile.objects.get_or_create(user=user)
 
-            # Update the profile's is_student field
             profile.is_student = self.cleaned_data.get('is_student', False)
 
-            # Print debug message to confirm
             print(f"Saving profile for user {user.username}: is_student={profile.is_student}")
 
-            # Save the profile
             profile.save()
 
         return user

@@ -10,7 +10,7 @@ from FinalProject.universities.models import University
 
 def university_students(request, university_id):
     university = get_object_or_404(University, id=university_id)
-    students = university.students.annotate(average_rating=Avg('ratings__stars'))  # Annotate with average_rating
+    students = university.students.annotate(average_rating=Avg('ratings__stars'))
 
     return render(request, 'students/university-students.html', {
         'university': university,
@@ -23,19 +23,15 @@ def student_detail(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     messages = student.messages.filter(parent_message__isnull=True).order_by('timestamp')
 
-    # Ensure average_rating is rounded or cast to an int
     average_rating = int(student.average_rating())
 
-    # Provide a range for 1 to 5 stars
     star_range = range(1, 6)
 
     if request.method == 'POST' and request.user.is_authenticated:
-        # Process message form
-        parent_message_id = request.POST.get('parent_message_id')  # Check for a parent message
-        content = request.POST.get('content')  # Message content
+        parent_message_id = request.POST.get('parent_message_id')
+        content = request.POST.get('content')
 
         if parent_message_id:
-            # Handle replies
             parent_message = get_object_or_404(Message, id=parent_message_id)
             Message.objects.create(
                 sender=request.user,
@@ -44,14 +40,12 @@ def student_detail(request, student_id):
                 content=content,
             )
         else:
-            # Handle new messages
             Message.objects.create(
                 sender=request.user,
                 student=student,
                 content=content,
             )
 
-        # Redirect to avoid form resubmission
         return redirect('student-detail', student_id=student.id)
 
     context = {
@@ -64,13 +58,10 @@ def student_detail(request, student_id):
     return render(request, 'students/student-detail.html', context)
 
 
-
-
 @login_required
 def student_edit(request, student_id):
     student = get_object_or_404(Student, id=student_id)
 
-    # Ensure only the owner can edit their profile
     if student.profile.user != request.user:
         return redirect('student-detail', student_id=student.id)
 
@@ -89,7 +80,6 @@ def student_edit(request, student_id):
 def student_delete(request, student_id):
     student = get_object_or_404(Student, id=student_id)
 
-    # Ensure only the owner can delete their profile
     if student.profile.user != request.user:
         return redirect('student-detail', student_id=student.id)
 
@@ -112,9 +102,9 @@ def student_form_view(request):
         form = StudentForm(request.POST)
         if form.is_valid():
             student = form.save(commit=False)
-            student.profile = profile  # Link the student to the current user's profile
+            student.profile = profile
             student.save()
-            return redirect('add-university')  # Adjust the redirect as needed
+            return redirect('add-university')
     else:
         form = StudentForm()
 
@@ -142,7 +132,7 @@ def rate_student(request, student_id):
             average_rating = student.average_rating()
             return JsonResponse({'message': 'Rating submitted successfully.', 'average_rating': average_rating})
         except Exception as e:
-            print(f"Error: {e}")  # Log the error
+            print(f"Error: {e}")
             return JsonResponse({'error': 'An unexpected error occurred.'}, status=500)
 
     return JsonResponse({'error': 'Invalid request method.'}, status=405)
