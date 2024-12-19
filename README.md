@@ -115,14 +115,13 @@ The platform promotes collaboration and knowledge sharing through forums and dir
 - **`requirements.txt`**: Lists all required dependencies to run the project.
 
 
-
 ## 🛠️ **Technologies Used**
 - **Backend**: Django 4.2
 - **Database**: PostgreSQL
 - **Frontend**: HTML, CSS, JavaScript
 - **Styling**: Custom CSS
 - **Environment Management**: `python-decouple` (for secure credentials)
-
+- **Deployment**: Microsoft Azure
 
 
 ## 🚀 Getting Started
