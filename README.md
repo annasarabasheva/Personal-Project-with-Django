@@ -122,6 +122,7 @@ The platform promotes collaboration and knowledge sharing through forums and dir
 - **Frontend**: HTML, CSS, JavaScript
 - **Styling**: Custom CSS
 - **Environment Management**: `python-decouple` (for secure credentials)
+- **Deployment**: Microsoft Azure 
 
 
 
